@@ -21,7 +21,7 @@ def guessing(dif):
     while True:
         guess=input("What is your guess: ")
         if str.isnumeric(guess) and int(guess) == number:
-            print("You guessed it!")
+            print("Ur actually a mega gamer")
             quit()
         elif guess=="quit":
             print("rage quit lmao")
@@ -29,6 +29,7 @@ def guessing(dif):
         elif int(guess) != number:
             print("ur bad lol")
 
+# ! means not
 # # Today we are going to learn about user input, strings, type casing, some branching today, and looping if time permits
 # # To ask the user what to do, we declare the variable as user info
 # #Ask the user to enter specific data via printing
