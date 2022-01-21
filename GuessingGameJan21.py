@@ -26,8 +26,10 @@ def guessing(dif):
         elif guess=="quit":
             print("rage quit lmao")
             quit()
-        elif int(guess) != number:
-            print("ur bad lol")
+        if int(guess) < number:
+            print("ur bad lol. Try higher")
+        if int(guess) > number:
+            print("ur bad lol. Try lower")
 
 # ! means not
 # # Today we are going to learn about user input, strings, type casing, some branching today, and looping if time permits
