@@ -12,4 +12,4 @@ print("Welcome to" , end=" ")
 print("Greenhill School")
 # Print all the words in the same line using the end= function or merging it into one print statement
 # EX: print("I", end=" ") plus the other two prints to create the final statement
-print("I love Greenhill")
+print("I\nlove\tGreenhill")
