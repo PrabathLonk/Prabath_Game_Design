@@ -17,6 +17,9 @@ def guessing(dif):
         number=random.randint(1,50)
     if int(dif) == 3:
         number=random.randint(1,100)
+    else:
+        print("can u read lol")
+        quit()
     # print(number) <-- This was used for testing purposes
     while True:
         guess=input("What is your guess: ")
