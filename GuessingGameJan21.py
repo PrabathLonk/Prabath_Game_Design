@@ -13,9 +13,9 @@ os.system('cls')
 def guessing(dif):
     if int(dif)==1:
         number=random.randint(1,10)
-    if int(dif) == 2:
+    elif int(dif) == 2:
         number=random.randint(1,50)
-    if int(dif) == 3:
+    elif int(dif) == 3:
         number=random.randint(1,100)
     else:
         print("can u read lol")
