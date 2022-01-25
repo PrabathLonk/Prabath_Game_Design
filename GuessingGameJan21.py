@@ -63,6 +63,7 @@ print("Level 2: 1-50")
 print("Level 3: 1-100")
 difficulty=input("Which level do you want: ")
 guessing(difficulty)
+# dif=difficulty in the function
 
 
 
