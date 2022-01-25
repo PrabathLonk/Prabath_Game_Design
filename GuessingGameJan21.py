@@ -9,6 +9,7 @@ os.system('cls')
 # The input at the beginning allows you to select the difficulty you want and chooses a number from the random ranges as we talked about in class
 # While the function is still ongoing (meaning there is no correct answer given), the computer keeps giving the opportunities to what to write, and if you give it wrong , it gives a message
 # The final things that was added is the ability to quit the program by typing in "quit"
+# Another way to do this is by creating 3 similar "if" statements by creating 3 scenerios each based on the answers given to the first question
 
 def guessing(dif):
     if int(dif)==1:
