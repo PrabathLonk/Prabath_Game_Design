@@ -51,8 +51,8 @@ def guessing(dif):
         
 
 Level1Ans = random.randint(1,10)
-Level2Ans = random.randint(1,30)
-Level3Ans = random.randint(1,50)
+Level2Ans = random.randint(1,50)
+Level3Ans = random.randint(1,100)
 
 
 while int(difficulty) == 1:
@@ -69,6 +69,9 @@ while int(difficulty) == 1:
                     menu()
                     choice =int(input("level choice:"))
                     Level1Ans = random.randint(1,10)
+                    if int(choice)>3:
+                        print("U dumb lol. That's not a level")
+                        quit()
                 elif response=="n":
                     quit()
 
@@ -86,9 +89,12 @@ while  int(difficulty) == 2:
                     os.system('cls')
                     menu()
                     choice =int(input("level choice:"))
-                    Level2Ans = random.randint(1,30)
-            elif response=="n":
-                    quit()
+                    Level2Ans = random.randint(1,50)
+                    if int(choice)>3:
+                        print("U dumb lol. That's not a level")
+                        quit()
+                    elif response=="n":
+                        quit()
 
 while int(difficulty) == 3:
         guess = input("What is your guess:")
@@ -96,14 +102,17 @@ while int(difficulty) == 3:
             print("Ur bad lol. The number is too big")
         if int(guess) < Level3Ans:
             print("Ur bad lol. The number is too small.")
-        if str.isnumeric(guess) and int(guess) ==Level3Ans:
+        if str.isnumeric(guess) and int(choice) ==Level3Ans:
             print("Ur actually a mega gamer")
             response= input("Do you want to play again (Y for yes, N for no)")
             if response=="y":
                     os.system('cls')
                     menu()
-                    choice =int(input("level choice:"))
-                    Level3Ans = random.randint(1,50)
+                    choice=int(input("level choice:"))
+                    Level3Ans = random.randint(1,100)
+                    if int(difficulty)>3:
+                        print("U dumb lol. That's not a level")
+                        quit()
             elif response=="n":
                     quit()
 
