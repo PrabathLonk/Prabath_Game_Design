@@ -1,5 +1,6 @@
 # # Prabath Girish (1/21/22)
 # # Import the os to make the terminal neater
+
 import os, random
 os.system('cls')
 
@@ -10,6 +11,22 @@ os.system('cls')
 # While the function is still ongoing (meaning there is no correct answer given), the computer keeps giving the opportunities to what to write, and if you give it wrong , it gives a message
 # The final things that was added is the ability to quit the program by typing in "quit"
 # Another way to do this is by creating 3 similar "if" statements by creating 3 scenerios each based on the answers given to the first question
+#Input for 2.71828 is a secret level for fun
+
+def menu():
+    print("============================================================")
+    print("|                                                           |")
+    print("|                 Guess the Number Game                     |")
+    print("|                                                           |")
+    print("=============================================================")
+    print("Level 1: 1-10")
+    print("Level 2: 1-50")
+    print("Level 3: 1-100")
+    difficulty=input("Which level do you want(Type:1,2,or 3): ")
+    guessing(difficulty)
+     
+menu()
+
 
 def guessing(dif):
     if int(dif)==1:
@@ -18,15 +35,18 @@ def guessing(dif):
         number=random.randint(1,50)
     elif int(dif) == 3:
         number=random.randint(1,100)
-    else:
-        print("can u read lol")
+    elif int(dif)==2.71828:
+        correct_number=random.randint(1,100000)
+    elif int(dif)>3:
+        print("can u read lol. put a number 1-3. Reset the program")
         quit()
     # print(number) <-- This was used for testing purposes
     while True:
         guess=input("What is your guess: ")
-        if str.isnumeric(guess) and int(guess) == number:
+        if str.isnumeric(guess) and int(guess) == correct_number(1,10):
             print("Ur actually a mega gamer")
-            quit()
+            os.system ('cls')
+            menu()
         elif guess=="quit":
             print("rage quit lmao")
             quit()
@@ -52,18 +72,22 @@ def guessing(dif):
 #the difficulty input is to decide what level you want by typing in 1-3
 # The guessing(difficulty) is to help replace the function "dif" with the difficultly 
 
-print("============================================================")
-print("|                                                           |")
-print("|                 Guess the Number Game                     |")
-print("|                                                           |")
-print("=============================================================")
+def menu():
+    print("============================================================")
+    print("|                                                           |")
+    print("|                 Guess the Number Game                     |")
+    print("|                                                           |")
+    print("=============================================================")
+    print("Level 1: 1-10")
+    print("Level 2: 1-50")
+    print("Level 3: 1-100")
+    difficulty=input("Which level do you want(Type:1,2,or 3): ")
 
-print("Level 1: 1-10")
-print("Level 2: 1-50")
-print("Level 3: 1-100")
-difficulty=input("Which level do you want(Type:1,2,or 3): ")
+
+# difficulty=input("Which level do you want(Type:1,2,or 3): ")
 guessing(difficulty)
 # dif=difficulty in the function
+
 
 
 
