@@ -17,13 +17,13 @@ os.system('cls')
 #guess = int(input("Please give me a number"))
  
 def menu():
-    print(" _________________________________________________________________ ")
-    print(" |                                                               |")
-    print(" |       Get Ready To Play: THE NUMBER GUESSING GAME             |")
-    print(" |                     level 1: 1-10                             |")
-    print(" |                     level 2: 1-30                             |")
-    print(" |                     level 3: 1-50                             |")
-    print(" _________________________________________________________________")
+    print(" ==========================================================================")
+    print(" |                                                                        |")
+    print(" |       Get Ready To Play: THE NUMBER GUESSING GAME!                     |")
+    print(" |                     level 1(3 tries): 1-10                             |")
+    print(" |                     level 2(4 tries): 1-30                             |")
+    print(" |                     level 3(5 tries): 1-50                             |")
+    print(" ==========================================================================")
     
 menu()
 
@@ -55,13 +55,15 @@ Level2Ans = random.randint(1,50)
 Level3Ans = random.randint(1,100)
 
 
+
 while int(difficulty) == 1:
         guess = input("What is your guess:")
+        tries = 0
         if int(guess) > Level1Ans:
                 print("Ur bad lol. The number is too big")
-        if int(guess) < Level1Ans:
+        elif int(guess) < Level1Ans:
                 print("Ur bad lol. The number is too small.")
-        if int(guess) == Level1Ans:
+        elif int(guess) == Level1Ans:
                 print("Ur a Mega Gamer")
                 response= input("Do you want to play again (Y for yes, N for no)")
                 if response=="y":
@@ -75,13 +77,33 @@ while int(difficulty) == 1:
                 elif response=="n":
                     quit()
 
+# if tries==3:
+#             print("oof! You ran out of tries, the number was:", Level1Ans)
+#             response= input("Do you want to play again (Y for yes, N for no)")
+#             if response=="y":
+#                     os.system('cls')
+#                     menu()
+#                     choice =int(input("level choice:"))
+#                     Level1Ans = random.randint(1,10)
+#                     if int(choice)>3:
+#                         print("U dumb lol. That's not a level")
+#                         quit()
+#             elif response=="n":
+#                     quit()
+
+
+
+
                
 while  int(difficulty) == 2:
         guess = input("What is your guess:")
+        tries = 0
         if int(guess) > Level2Ans:
             print("Ur bad lol. The number is too big")
+            tries = tries + 1
         if int(guess) < Level2Ans:
             print("Ur bad lol. The number is too small.")
+            tries = tries + 1
         if str.isnumeric(guess) and int(guess) ==Level2Ans:
             print("Ur a Mega Gamer")
             response= input("Do you want to play again (Y for yes, N for no)")
