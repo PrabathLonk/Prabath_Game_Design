@@ -10,6 +10,7 @@
 #userInfo= int(input()) #input returns string, we must type cast because we need a number
 #print("The number is %.2f " %(userInfo/3)) #we use .2 float to get the correct formatting
 
+# NEVER HAVE TWO VERTICAL LINES BE EXACTLY THE SAME  NEXT TO EACH OTHER
 
 import os, random
 os.system('cls')
@@ -50,7 +51,7 @@ def guessing(dif):
     elif int(dif)==3:
         number_onetofifty= random.randint(1,50)    
     elif int(dif)>3:
-        print("That's not a level.Error404")
+        print("That's not a level.Error404.")
         quit()
         
 
