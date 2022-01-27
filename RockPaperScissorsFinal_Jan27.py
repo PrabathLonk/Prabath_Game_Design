@@ -11,8 +11,6 @@
 
 # import the os
 import os, random
-
-from NumberGuess_InClassVersion_Jan25 import GameOn
 os.system('cls')
 
 def menu():
