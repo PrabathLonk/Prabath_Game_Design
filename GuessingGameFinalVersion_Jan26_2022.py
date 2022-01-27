@@ -7,8 +7,8 @@
 
 # declare the variable
 #print("Enter a number from 1-10:")
-#userInfo= int(input()) #input returns string, we must type cast bc we need a number
-#print("The number is %.2f " %(userInfo/3)) #we use .2 float to get the thingy
+#userInfo= int(input()) #input returns string, we must type cast because we need a number
+#print("The number is %.2f " %(userInfo/3)) #we use .2 float to get the correct formatting
 
 
 import os, random
@@ -22,7 +22,7 @@ def menu():
     print(" |     Get Ready To Play: THE NUMBER GUESSING GAME! (Type number 1-3)     |")
     print(" |             level 1(3 tries): 1-10 (higher or lower mode)              |")
     print(" |                 level 2(4 tries): 1-50 (division mode)                 |")
-    print(" |                 level 3(5 tries): 1-100 (evil mode)                     |")
+    print(" |                 level 3(5 tries): 1-100 (evil mode)                    |")
     print(" ==========================================================================")
     print("LVL 1:Higher or lower tells you if the answer is higher or lower than your guess")
     print("LVL 2:The computer will give you ONE clue, regarding a number the answer is or isn't divisible by")
