@@ -204,7 +204,7 @@ while int(difficulty) == 3:
                     quit()
         if int(guess) < Level3Ans:
             print("Ur bad lol. The number is too big.")
-            tries+1
+            tries=tries+1
             if tries>=5:
                 print("oof! You ran out of tries, the number was:", Level1Ans)
                 response= input("Do you want to play again (Y for yes, N for no)")
