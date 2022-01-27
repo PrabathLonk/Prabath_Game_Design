@@ -219,7 +219,7 @@ while int(difficulty) == 3:
                         quit()
                 elif response=="n":
                     quit()
-        if str.isnumeric(guess) and int(choice) ==Level3Ans:
+        if str.isnumeric(guess) and int(guess) ==Level3Ans:
             print("Ur actually a mega gamer")
             response= input("Do you want to play again (Y for yes, N for no)")
             if response=="y":
