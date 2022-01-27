@@ -24,7 +24,7 @@ def menu():
     print(" |                 level 2(4 tries): 1-30 (division mode)                 |")
     print(" |                 level 3(5 tries): 1-50 (evil mode)                     |")
     print(" ==========================================================================")
-    print("LVL 1:Higher or lower tells you if your number is higher or lower than your guess")
+    print("LVL 1:Higher or lower tells you if the answer is higher or lower than your guess")
     print("LVL 2:The computer will give you ONE clue, regarding a number the answer is or isn't divisible by")
     print("LVL 3:Try it out...IF YOU DARE 😈😈😈")
     
