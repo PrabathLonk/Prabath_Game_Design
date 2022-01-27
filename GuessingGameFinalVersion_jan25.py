@@ -19,11 +19,14 @@ os.system('cls')
 def menu():
     print(" ==========================================================================")
     print(" |                                                                        |")
-    print(" |       Get Ready To Play: THE NUMBER GUESSING GAME!                     |")
-    print(" |                     level 1(3 tries): 1-10                             |")
-    print(" |                     level 2(4 tries): 1-30                             |")
-    print(" |                     level 3(5 tries): 1-50                             |")
+    print(" |     Get Ready To Play: THE NUMBER GUESSING GAME! (Type number 1-3)     |")
+    print(" |             level 1(3 tries): 1-10 (higher or lower mode)              |")
+    print(" |                 level 2(4 tries): 1-30 (division mode)                 |")
+    print(" |                 level 3(5 tries): 1-50 (evil mode)                     |")
     print(" ==========================================================================")
+    print("LVL 1:Higher or lower tells you if your number is higher or lower than your guess")
+    print("LVL 2:The computer will give you ONE clue, regarding a number the answer is or isn't divisible by")
+    print("LVL 3:Try it out...IF YOU DARE 😈😈😈")
     
     
 menu()
@@ -47,13 +50,14 @@ def guessing(dif):
     elif int(dif)==3:
         number_onetofifty= random.randint(1,50)    
     elif int(dif)>3:
-        print("U dumb lol. That's not a level")
+        print("That's not a level.Error404")
         quit()
         
 
 Level1Ans = random.randint(1,10)
 Level2Ans = random.randint(1,50)
 Level3Ans = random.randint(1,100)
+divisor=random.randint(1,3)
 
 
 
@@ -72,7 +76,7 @@ while int(difficulty) == 1:
                         choice =int(input("level choice:"))
                         Level1Ans = random.randint(1,10)
                         if int(choice)>3:
-                            print("U dumb lol. That's not a level")
+                            print("That's not a level.Error404")
                             quit()
                     elif response=="n":
                         quit()
@@ -89,7 +93,7 @@ while int(difficulty) == 1:
                      choice =int(input("level choice:"))
                     Level1Ans = random.randint(1,10)
                     if int(choice)>3:
-                        print("U dumb lol. That's not a level")
+                        print("That's not a level.Error404")
                         quit()
                     elif response=="n":
                      quit()
@@ -103,7 +107,7 @@ while int(difficulty) == 1:
                     choice =int(input("level choice:"))
                     Level1Ans = random.randint(1,10)
                     if int(choice)>3:
-                        print("U dumb lol. That's not a level")
+                        print("That's not a level.Error404")
                         quit()
                 elif response=="n":
                     quit()
@@ -128,8 +132,8 @@ while int(difficulty) == 1:
                
 while  int(difficulty) == 2:
         guess = input("What is your guess:")
-        if int(guess) > Level2Ans:
-            print("Ur bad lol. The number is too big")
+        if int(guess) != Level2Ans and Level2Ans%divisor==0:
+            print("Ur bad lol. The number is divisible by" , divisor)
             tries = tries + 1
             if tries>=4:
                 print("oof! You ran out of tries, the number was:", Level1Ans)
@@ -139,14 +143,15 @@ while  int(difficulty) == 2:
                     menu()
                     tries=0
                     choice =int(input("level choice:"))
-                    Level1Ans = random.randint(1,10)
+                    Level2Ans = random.randint(1,50)
+                    divisor=random.randint(1,10)
                     if int(choice)>3:
-                        print("U dumb lol. That's not a level")
+                        print("That's not a level.Error404")
                         quit()
                 elif response=="n":
                     quit()
-        if int(guess) < Level2Ans:
-            print("Ur bad lol. The number is too small.")
+        elif int(guess) != Level2Ans and Level2Ans%divisor!=0:
+            print("Ur bad lol. The number is not divisible by" , divisor)
             tries = tries + 1
             if tries>=4:
                 print("oof! You ran out of tries, the number was:", Level1Ans)
@@ -155,9 +160,10 @@ while  int(difficulty) == 2:
                     os.system('cls')
                     menu()
                     choice =int(input("level choice:"))
-                    Level1Ans = random.randint(1,10)
+                    Level1Ans = random.randint(1,50)
+                    divisor=random.randint(1,10)
                     if int(choice)>3:
-                        print("U dumb lol. That's not a level")
+                        print("That's not a level.Error404")
                         quit()
                 elif response=="n":
                     quit()
@@ -170,8 +176,9 @@ while  int(difficulty) == 2:
                     tries = 0
                     choice =int(input("level choice:"))
                     Level2Ans = random.randint(1,50)
+                    divisor= random.randint(1,10)
                     if int(choice)>3:
-                        print("U dumb lol. That's not a level")
+                        print("That's not a level.Error404")
                         quit()
             elif response=="n":
                         quit()
@@ -179,7 +186,7 @@ while  int(difficulty) == 2:
 while int(difficulty) == 3:
         guess = input("What is your guess:")
         if int(guess) > Level3Ans:
-            print("Ur bad lol. The number is too big")
+            print("Ur bad lol. The number is too small")
             tries=tries+1
             if tries>=5:
                 print("oof! You ran out of tries, the number was:", Level1Ans)
@@ -189,14 +196,14 @@ while int(difficulty) == 3:
                     menu()
                     tries=0
                     choice =int(input("level choice:"))
-                    Level1Ans = random.randint(1,10)
+                    Level1Ans = random.randint(1,100)
                     if int(choice)>3:
-                        print("U dumb lol. That's not a level")
+                        print("That's not a level. Error404")
                         quit()
                 elif response=="n":
                     quit()
         if int(guess) < Level3Ans:
-            print("Ur bad lol. The number is too small.")
+            print("Ur bad lol. The number is too big.")
             tries+1
             if tries>=5:
                 print("oof! You ran out of tries, the number was:", Level1Ans)
@@ -206,9 +213,9 @@ while int(difficulty) == 3:
                     menu()
                     tries=0
                     choice =int(input("level choice:"))
-                    Level1Ans = random.randint(1,10)
+                    Level3Ans = random.randint(1,100)
                     if int(choice)>3:
-                        print("U dumb lol. That's not a level")
+                        print("That's not a level. Error404")
                         quit()
                 elif response=="n":
                     quit()
@@ -222,7 +229,7 @@ while int(difficulty) == 3:
                     choice=int(input("level choice:"))
                     Level3Ans = random.randint(1,100)
                     if int(difficulty)>3:
-                        print("U dumb lol. That's not a level")
+                        print("That's not a level.Error404")
                         quit()
             elif response=="n":
                     quit()
