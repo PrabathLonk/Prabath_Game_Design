@@ -62,7 +62,7 @@ divisor=random.randint(1,3)
 
 
 while int(difficulty) == 1:
-        guess = input("What is your guess:")
+        guess = input("What is your guess:")   
         if int(guess) > Level1Ans:
                 print("Ur bad lol. The number is too big")
                 tries = tries+1
