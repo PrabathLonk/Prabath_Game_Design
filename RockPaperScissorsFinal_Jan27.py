@@ -38,18 +38,7 @@ ValueError!=int
 # The first scenario given is 
 while GameOn==True:   
     # print(CompAction) <-- Used for testing each choice
-    if ValueError:
-        print("Invalid move, try again later!")
-        response = input("do you want to play again (y for yes, n for no): ")
-        if response =="y" or response =="Y":
-            os.system('cls')
-            menu()
-            CompAction= random.randint(1,3)
-            UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
-        elif response=="n" or response=="N":
-            GameOn=False
-            quit()
-    elif int(UserAction)==int(CompAction):
+    if int(UserAction)==int(CompAction):
         print ("You tied!")
         response = input("do you want to play again (y for yes, n for no): ")
         if response =="y" or response =="Y":
@@ -126,7 +115,7 @@ while GameOn==True:
         elif response=="n" or response=="N":
             GameOn=False
             quit()
-    elif int(UserAction)>3:
+    elif int(UserAction)>3 or ValueError:
         print("Illegal rock paper scissors move. Try again ")
         response = input("do you want to play again (y for yes, n for no): ")
         if response =="y" or response=="Y":
@@ -137,7 +126,17 @@ while GameOn==True:
         elif response=="n"or response=="N":
             GameOn=False
             quit()
-
+    # if UserAction==ValueError:
+    #     print("Invalid move, try again later!")
+    #     response = input("do you want to play again (y for yes, n for no): ")
+    #     if response =="y" or response =="Y":
+    #         os.system('cls')
+    #         menu()
+    #         CompAction= random.randint(1,3)
+    #         UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
+    #     elif response=="n" or response=="N":
+    #         GameOn=False
+    #         quit()
 # Extra notes:
 #Tuple is a variable that works like a collection of numbers and can help pull out items in the list needed for certain situations
 # An array is a list of items that can be used to collect needed values and use them in specific scenarios or to elect a random one of them
