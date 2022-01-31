@@ -47,6 +47,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n" or response=="N":
+            GameOn=False
             quit()
     elif int(UserAction)==int(CompAction):
         print ("You tied!")
@@ -57,6 +58,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n" or response=="N":
+            GameOn=False
             quit()
     elif int(UserAction)==1 and int(CompAction)==2:
         print("Paper covered your rock! You lose.")
@@ -67,6 +69,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n" or response=="N":
+            GameOn=False
             quit()
     elif int(UserAction)==2 and int(CompAction)==3:
         print ("Your paper was cut by scissors. You lose.")
@@ -77,6 +80,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n" or response=="N":
+            GameOn=False
             quit()
     elif int(UserAction)==3 and int(CompAction)==1:
         print("Your scissors were crushed by rock. You lose.")
@@ -87,6 +91,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n" or response=="N":
+            GameOn=False
             quit()
     elif int(UserAction)==2 and int(CompAction)==1:
         print ("Your paper covers the opposing rock! You win!")
@@ -97,6 +102,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n" or response=="N":
+            GameOn=False
             quit()
     elif int(UserAction)==3 and int(CompAction)==2:
         print("Your scissors cut the opposing paper.You win!")
@@ -107,6 +113,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n" or response=="N":
+            GameOn=False
             quit()
     elif int(UserAction)==1 and int(CompAction)==3:
         print("Your rock crushed the opposing scissors. You win!")
@@ -117,6 +124,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n" or response=="N":
+            GameOn=False
             quit()
     elif int(UserAction)>3:
         print("Illegal rock paper scissors move. Try again ")
@@ -127,6 +135,7 @@ while GameOn==True:
             CompAction= random.randint(1,3)
             UserAction = input("Type in your choice (1 for rock, 2 for paper, 3 for scissors):")
         elif response=="n"or response=="N":
+            GameOn=False
             quit()
 
 # Extra notes:
