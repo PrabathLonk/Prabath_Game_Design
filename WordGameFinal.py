@@ -6,6 +6,8 @@
 # Give them a certain number of tries and ask them to guess the word at the end
 # import os for neatness and random for random selection
 import os, random
+
+from NumberGuess_InClassVersion_Jan25 import GameOn
 os.system('cls')
 #define our menu
 def menu():
@@ -20,10 +22,10 @@ def menu():
 menu()
 
 # define our words in our list for the computer to choose from
-Wordbank= ["onion", "python", "giant", "phone", "enter", "light", "couch"]
+Wordbank= ["onion", "python", "rebel", "phone", "enter", "light", "eight"]
 # now we make the computer select the word it wants to use for that round
 word=random.choice(Wordbank)
-# print(word)  <--- This was used for testing
+print(word) 
 
 # create a check to make sure the user can only put in letters, and set game on to true to continue
 check=True
@@ -46,30 +48,10 @@ while GameOn==True:
         print(letter,"is not in the word")
         tries=tries+1
         letter=input("please give your letter guess:")
-    elif len(letter)>1 or not letter.isalpha():
-        print("Invalid move try again later")
-        quit()
     if tries>=5:
         finalGuess=input("what do you think the word is:")
         if finalGuess==word:
             print("OMG! You got the word!")
-            response=input("do you want to play again (y for yes, n for no):")
-            if response=="y" or response=="Y":
-                os.system('cls')
-                menu()
-                word=word=random.choice(Wordbank)
-                letter=input("please give your letter guess:")
-            else:
-                GameOn=False
-                quit()
         else:
             print("oof you didnt get the word, it was:", word)
-            response=input("do you want to play again (y for yes, n for no):")
-            if response=="y" or response=="Y":
-                os.system('cls')
-                menu()
-                word=word=random.choice(Wordbank)
-                letter=input("please give your letter guess:")
-            else:
-                GameOn=False
-                quit()
+            quit()
