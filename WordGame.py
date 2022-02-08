@@ -12,17 +12,22 @@ def menu():
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     print("$                                                 $")
     print("$     WELCOME TO THE GUESS THE WORD GAME!!!!!!    $")
+    print("$            Level 1: Foods                       $")
+    print("$            Level 2: Colors                      $")
+    print("$            Level 3: Computer Parts              $")
     print("$                                                 $")
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    print("ALL WORDS ARE 5 LETTERS EACH, you get 5 tries")
+    print("Pick the level by typing 1-3:")
 
 
 menu()
 
 # define our words in our list for the computer to choose from
-Wordbank= ["onion", "python", "giant", "phone", "enter", "light", "couch"]
+Wordbank_Food= ["onion", "grape", "bread", "pizza", "pasta", "artichoke", "chicken"]
+# WordBank_Animals=["zebra","turtle", "fish", "elephant", "lion", "monkey", "snake"]
+WordBank_Colors=["crimson", "black", "lilac", "white", "orange", "violet", "emerald"]
 # now we make the computer select the word it wants to use for that round
-word=random.choice(Wordbank)
+# word=random.choice(Wordbank)
 # print(word)  <--- This was used for testing
 
 # create a check to make sure the user can only put in letters, and set game on to true to continue
@@ -36,7 +41,7 @@ while check:
         GameOn=True
 
 # Set in a function for 5 tries if we can check the letters if they are in the word
-tries = 0
+tries = len(word) + 1
 while GameOn==True:
     if letter in word:
         print (letter, "is in the word")
@@ -47,8 +52,7 @@ while GameOn==True:
         tries=tries+1
         letter=input("please give your letter guess:")
     elif len(letter)>1 or not letter.isalpha():
-        print("Invalid move try again later")
-        quit()
+        print("Invalid move try again")
     if tries>=5:
         finalGuess=input("what do you think the word is:")
         if finalGuess==word:
