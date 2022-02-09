@@ -1,7 +1,12 @@
-import os, random
-os.system('cls')
+#MariaSuarez 
+# 02/08/2022
+# Word game with 3 levels: 
+#        1. Fruits    
+#        2. Animals 
+#        3. Computer Parts    
+# Choice:
 
-
+#define menu:
 def menu():
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     print("$                                                 $")
@@ -13,69 +18,59 @@ def menu():
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     print("Pick the level by typing 1-3")
 
-
-
 menu()
-
-
-
-Wordbank_Food= ["onion", "grape", "bread", "pizza", "pasta", "artichoke", "lychee", "baguette", "yogurt"]
-WordBank_Colors=["crimson", "black", "lilac", "white", "orange", "violet", "emerald", "mustard", "sapphire"]
-WordBank_CompParts=["monitor", "motherboard", "keyboard", "mouse", "speakers", "processor", "battery"]
-levelchoice=input("What is your level choice:")
+#Create word lists
+import os, random
+os.system('cls')
+word=""
+guess=""
 def selectWord():
     global word
-    if int(levelchoice)==1:
-        word=random.choice(Wordbank_Food)
-    elif int(levelchoice)==2:
-        word=random.choice(WordBank_Colors)
-    elif int(levelchoice)==3:
-        word=random.choice(WordBank_CompParts)
+    fruits=["bananas", "grapes", "waterMelon", 'blueberries', 'apples', "blackberries",
+    "papaya", 'oranges', 'tomatoes', 'mangos', 'kiwis','strawberries' ]
 
+    # size= len(fruits)
+    # randy= random.randint(0,size)
+    # print(randy)
+    # word=fruits[randy]
+    # print(word)
+    word=random.choice(fruits)
 
-def guessCheck():
-    global answer
-    check =True
+def guessFunction():
+    global guess
+    check=True
     while check:
-        answer = input("guess a letter: ")
-        if len(answer)>1 or not answer.isalpha():
-            print("NOOOOO")
-        else:
-            check = False
-
-Gameon = True
-tries = 0
-letterguessed  = " "
-while Gameon:
-    guessCheck()
-    if answer not in word:
-        tries=tries+1
-    for answer in word:
-        if answer in word:
-            print (answer, end= " ")
-            tries=tries+1
+        try:
+            guess=input("\nenter a letter to guess the word ")
+            if guess.isalpha() and len(guess)==1:
+                check=False
+            else:
+                print("only one letter please")
+        except ValueError:
+            print("only one letter please")
+            
+gameOn=True
+tries=0
+letterGuessed=""
+selectWord()
+while gameOn:
+    
+    guessFunction()
+    letterGuessed += guess  #letterGuessed=letterGuessed + guess
+    if guess not in word:
+        tries +=1
+        print(tries)# for testing delete when game is ready
+    countLetter=0
+    for letter in word:
+        if letter in letterGuessed:
+            print(letter, end=" ")
+            countLetter +=1
         else:
             print("_", end=" ")
-        
-
-   
-
-
-
-# if answer not in letterguessed:
-#         tries=tries+1
-#         print("Thats not in the word") # for testing
-#     countletter=0
-#     for answer in letterguessed:
-#         if answer in letterguessed:
-#             print(answer, end= " ")
-#             tries=tries+1
-#         else:
-#             print("_", end=" ")
-#     if tries > 6:
-#         print("\nyou ran outta chances")
-#         # playgame()
-#     if countletter == len(word):
-#         print("you guessed it!")
-#         # calculatescore()
-#         # playgame()
+    if tries >6:
+        print("\n Sorry run out chances ")
+        #playGame() ask if they want to play again
+    if countLetter == len(word):
+        print ("\nyou guessed! ")
+        #Calculate score
+        #playGame()
