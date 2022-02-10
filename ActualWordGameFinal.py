@@ -89,6 +89,7 @@ def guessFunction():
             
 gameOn=True
 tries=0
+ScoreCount=0
 letterGuessed=" "
 selectWord()
 while gameOn:
@@ -121,16 +122,20 @@ while gameOn:
             quit()
     if countLetter == len(word):
         print ("you guessed the word!")
-        reply=input("Do you want to play again:")
+        score=len(word)
+        # ScoreCount=ScoreCount+1
+        # scoreBank=[score]
+        reply=input("Do you want to play again(y for yes, n for no):")
         if reply=='y':
             os.system('cls')
             menu()
+            countLetter=0
+            letterGuessed=" "
             tries=0
             L()
             selectWord()
-            gameOn=True
+            gameOn=True   
         elif reply=='n':
             os.system('cls')
-            score=len(word)
             print("Thanks for playing. Your score was",score)
             quit()
