@@ -18,7 +18,7 @@ def menu():
     print("$            Level 3: Computer Parts              $")
     print("$                                                 $")
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    print("Pick the level by typing 1-3")
+    print("Pick the level by typing 1-3(q to quit, h to show highscores)")
 
 menu()
 #Create word lists and a function to check the level values
@@ -55,8 +55,10 @@ def L():
         print("L")
         print("L")
         quit()
+
+
 # define our word lists:
-fruits=["bananas", "grapes", "waterMelon", 'blueberries', 'apples', "blackberries",
+fruits=["bananas", "grapes", "watermelon", 'blueberries', 'apples', "blackberries",
     "papaya", 'oranges', 'tomatoes', 'mangos', 'kiwis','strawberries', 'monke' ]
 WordBank_Colors=["crimson", "black", "lilac", "white", "orange", "violet", "emerald", "mustard", "sapphire", 'monke']
 WordBank_CompParts=["monitor", "motherboard", "keyboard", "mouse", "speakers", "processor", "battery", "monke"]
@@ -71,6 +73,12 @@ def selectWord():
         word=random.choice(WordBank_Colors)
     elif int(levelchoice)==3:
         word=random.choice(WordBank_CompParts)
+    # elif levelchoice=="q":
+    #     print("Thanks for playing.Try again soon!")
+    #     quit()
+    # elif levelchoice=="h":
+    #     print("The score to beat is", highscore)
+    #     quit()
 
 
 
@@ -89,16 +97,15 @@ def guessFunction():
             
 gameOn=True
 tries=0
-ScoreCount=0
+highscore=0
 letterGuessed=" "
 selectWord()
 while gameOn:
-    
     guessFunction()
     letterGuessed += guess  #letterGuessed=letterGuessed + guess
     if guess not in word:
         tries +=1
-        print(tries)# for testing delete when game is ready
+        # print(tries)<--for testing delete when game is ready
     countLetter=0
     for letter in word:
         if letter in letterGuessed:
@@ -106,6 +113,7 @@ while gameOn:
             countLetter +=1
         else:
             print("_", end=" ")
+             
     if tries > len(word):
         print("\n L, the word was", word)
         reply=input("do you want to play agian:")
@@ -122,9 +130,10 @@ while gameOn:
             quit()
     if countLetter == len(word):
         print ("you guessed the word!")
-        score=len(word)
-        # ScoreCount=ScoreCount+1
-        # scoreBank=[score]
+        score=len(word)-tries
+        if score>highscore:
+            highscore=score
+            score=0
         reply=input("Do you want to play again(y for yes, n for no):")
         if reply=='y':
             os.system('cls')
@@ -136,6 +145,11 @@ while gameOn:
             selectWord()
             gameOn=True   
         elif reply=='n':
-            os.system('cls')
-            print("Thanks for playing. Your score was",score)
-            quit()
+             os.system('cls')
+             print("Thanks for playing. Your score was",highscore)
+             quit()
+
+
+# os.system('cls')
+#             score=len(word)
+#             print("Thanks for playing. Your score was",score)
