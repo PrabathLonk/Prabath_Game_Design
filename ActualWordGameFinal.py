@@ -115,7 +115,22 @@ while gameOn:
             L()
             selectWord()
             gameOn=True
+        if reply=='n':
+            os.system('cls')
+            print("Thanks for playing.Try again soon!")
+            quit()
     if countLetter == len(word):
-        print ("\nyou guessed the word! ")
-        #Calculate score
-        #playGame()
+        print ("you guessed the word!")
+        reply=input("Do you want to play again:")
+        if reply=='y':
+            os.system('cls')
+            menu()
+            tries=0
+            L()
+            selectWord()
+            gameOn=True
+        elif reply=='n':
+            os.system('cls')
+            score=len(word)
+            print("Thanks for playing. Your score was",score)
+            quit()
