@@ -8,8 +8,11 @@
 
 import os, random
 os.system('cls')
+highscore=0
 #define menu:
 def menu():
+    # global highscore
+    # print("Can you beat the current highscore of", highscore)
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     print("$                                                 $")
     print("$     WELCOME TO THE GUESS THE WORD GAME!!!!!!    $")
@@ -18,11 +21,10 @@ def menu():
     print("$            Level 3: Computer Parts              $")
     print("$                                                 $")
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    print("Pick the level by typing 1-3(q to quit, h to show highscores)")
+    print("Pick the level by typing 1-3(q to quit)")
 
 menu()
-#Create word lists and a function to check the level values
-ValueError!=int
+#Create word lists and a function to check the level value
 def L():
     global levelchoice
     levelchoice=input("what level do you want:")
@@ -78,7 +80,9 @@ def selectWord():
     #     quit()
     # elif levelchoice=="h":
     #     print("The score to beat is", highscore)
-    #     quit()
+    #     menu()
+    #     levelchoice=input("What level do you want:")
+    
 
 
 
