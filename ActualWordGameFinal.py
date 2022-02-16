@@ -11,8 +11,6 @@ os.system('cls')
 highscore=0
 #define menu:
 def menu():
-    # global highscore
-    # print("Can you beat the current highscore of", highscore)
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     print("$                                                 $")
     print("$     WELCOME TO THE GUESS THE WORD GAME!!!!!!    $")
@@ -21,42 +19,42 @@ def menu():
     print("$            Level 3: Computer Parts              $")
     print("$                                                 $")
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    print("Pick the level by typing 1-3(q to quit)")
+    print("Pick the level by typing 1-3(q to quit, 4 for highscore)")
 
 menu()
 #Create word lists and a function to check the level value
-def L():
-    global levelchoice
-    levelchoice=input("what level do you want:")
-    if int(levelchoice)>3 or int(levelchoice)<1:
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        print("L")
-        quit()
+# def L():
+#     global levelchoice
+#     levelchoice=input("what level do you want:")
+#     if int(levelchoice)>3 or int(levelchoice)<1:
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         print("L")
+#         quit()
 
 
 # define our word lists:
@@ -65,23 +63,31 @@ fruits=["bananas", "grapes", "watermelon", 'blueberries', 'apples', "blackberrie
 WordBank_Colors=["crimson", "black", "lilac", "white", "orange", "violet", "emerald", "mustard", "sapphire", 'monke']
 WordBank_CompParts=["monitor", "motherboard", "keyboard", "mouse", "speakers", "processor", "battery", "monke"]
 
-L()
 # Create a function to run for each category choice
-def selectWord():
+levelchoice=" "
+def LevelChoice():
     global word
-    if int(levelchoice)==1:
+    levelchoice = input("What level do you want:")
+    if "q" in levelchoice:
+        print("THANKS FOR PLAYING") 
+        quit()
+        levelchoice=input("What level do you want:")
+    levelchoice=(int)(levelchoice)   
+    if levelchoice==1:
         word=random.choice(fruits)
-    elif int(levelchoice)==2:
+    elif levelchoice==2:
         word=random.choice(WordBank_Colors)
-    elif int(levelchoice)==3:
+    elif levelchoice==3:
         word=random.choice(WordBank_CompParts)
-    # elif levelchoice=="q":
-    #     print("Thanks for playing.Try again soon!")
-    #     quit()
-    # elif levelchoice=="h":
-    #     print("The score to beat is", highscore)
-    #     menu()
-    #     levelchoice=input("What level do you want:")
+    elif int(levelchoice)>4 or int(levelchoice)<1:
+        print("L")
+        quit()
+    elif levelchoice==4:
+        print("The highscore is", highscore)
+        levelchoice = input("What level do you want:")
+        # print("Thanks for playing.Try again soon!")
+        # print("Your high score was", highscore)
+        quit()
     
 
 
@@ -101,9 +107,8 @@ def guessFunction():
             
 gameOn=True
 tries=0
-highscore=0
 letterGuessed=" "
-selectWord()
+LevelChoice()
 while gameOn:
     guessFunction()
     letterGuessed += guess  #letterGuessed=letterGuessed + guess
@@ -125,8 +130,7 @@ while gameOn:
             os.system('cls')
             menu()
             tries=0
-            L()
-            selectWord()
+            LevelChoice()
             gameOn=True
         if reply=='n':
             os.system('cls')
@@ -145,8 +149,7 @@ while gameOn:
             countLetter=0
             letterGuessed=" "
             tries=0
-            L()
-            selectWord()
+            LevelChoice()
             gameOn=True   
         elif reply=='n':
              os.system('cls')
