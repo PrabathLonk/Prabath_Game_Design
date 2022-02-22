@@ -57,37 +57,44 @@ print()
 halfDeck=int(len(deck)/2)
 plyr1=0
 plyr2=0
-
-    #ask user to hit a key to release cards
+ExtraDeckP1=[]
+ExtraDeckP2=[]
+#ask user to hit a key to release cards
 
 def GamePlay(): 
     global click   
     global plyr1
     global plyr2
+    global ExtraDeckP1
+    global ExtraDeckP2
     for i in range (0,halfDeck):
         click=input("Press any key to get cards:")
         print("Player 1     Player 2")
         print("     "+player1[i]+"      "+player2[i])
         if player1[i]>player2[i]:
             plyr1 +=1
+            ExtraDeckP1.extend(player1)
+            ExtraDeckP1.extend(player2)
         elif player1[i]<player2[i]:
-            plyr2 +=1   
+            plyr2 +=1  
+            ExtraDeckP2.extend(player1)
+            ExtraDeckP2.extend(player2) 
         print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
-        if len(player1)==0 or len(player2)==0:
-            if plyr1>plyr2:
-                print("Player one won the game "+str(plyr1)+" to "+str(plyr2))
-                quit()
-            else:
-                print("Player two won the game "+str(plyr2)+" to "+str(plyr1))
-                quit()
-        
+        if len(player1)>len(player2):
+                player1.extend(ExtraDeckP1)
+                halfDeck=len(player1)
+        elif len(player1)<len(player2):
+                player2.extend(ExtraDeckP2)
+                halfDeck=len(player2)
+                
+                
 GamePlay()
 
 
 
-if plyr1>plyr2:
-    print("Player one won the game "+str(plyr1)+" to "+str(plyr2))
-    quit
-else:
-    print("Player two won the game "+str(plyr2)+" to "+str(plyr1))
-    quit
+# if plyr1>plyr2:
+#     print("Player one won the game "+str(plyr1)+" to "+str(plyr2))
+#     quit
+# else:
+#     print("Player two won the game "+str(plyr2)+" to "+str(plyr1))
+#     quit
