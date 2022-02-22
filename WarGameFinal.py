@@ -67,8 +67,15 @@ for i in range (0,halfDeck):
     elif player1[i]<player2[i]:
         plyr2 +=1
     print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
+    if player1[i]==player2[i]:
+        plyr1=plyr1
+        plyr2=plyr2
+
+
 
 if plyr1>plyr2:
     print("Player one won the game "+str(plyr1)+" to "+str(plyr2))
+    quit
 else:
     print("Player two won the game "+str(plyr2)+" to "+str(plyr1))
+    quit
