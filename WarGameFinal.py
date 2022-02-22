@@ -1,5 +1,7 @@
 #Prabath Girish
 #2/20/22
+# The requirements are something that we must have
+# Then after adding the requirements we can add extra things we notice to optimize the program and make it better
 #WE need to import random and os for shuffling and neatness respectively
 import random, os
 os.system('cls')
@@ -49,27 +51,37 @@ for l in range(52):
         player2.append(deck[l])
 
 
-print("player1 ",player1)
+# print("player1 ",player1) <-- Just for testing
 print()
-print("player2 ",player2)
+# print("player2 ",player2) <-- Also for testing
 halfDeck=int(len(deck)/2)
 plyr1=0
 plyr2=0
 
     #ask user to hit a key to release cards
-    
-for i in range (0,halfDeck):
-    click=input("Press any key to get cards")
-    print("Player 1     Player 2")
-    print("     "+player1[i]+"      "+player2[i])
-    if player1[i]>player2[i]:
-        plyr1 +=1
-    elif player1[i]<player2[i]:
-        plyr2 +=1
-    print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
-    if player1[i]==player2[i]:
-        plyr1=plyr1
-        plyr2=plyr2
+
+def GamePlay(): 
+    global click   
+    global plyr1
+    global plyr2
+    for i in range (0,halfDeck):
+        click=input("Press any key to get cards:")
+        print("Player 1     Player 2")
+        print("     "+player1[i]+"      "+player2[i])
+        if player1[i]>player2[i]:
+            plyr1 +=1
+        elif player1[i]<player2[i]:
+            plyr2 +=1   
+        print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
+        if len(player1)==0 or len(player2)==0:
+            if plyr1>plyr2:
+                print("Player one won the game "+str(plyr1)+" to "+str(plyr2))
+                quit()
+            else:
+                print("Player two won the game "+str(plyr2)+" to "+str(plyr1))
+                quit()
+        
+GamePlay()
 
 
 
