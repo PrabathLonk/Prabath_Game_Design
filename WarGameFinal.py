@@ -59,7 +59,7 @@ plyr2=0
     #ask user to hit a key to release cards
     
 for i in range (0,halfDeck):
-    click=input("Press a any key to get cards")
+    click=input("Press any key to get cards")
     print("Player 1     Player 2")
     print("     "+player1[i]+"      "+player2[i])
     if player1[i]>player2[i]:
