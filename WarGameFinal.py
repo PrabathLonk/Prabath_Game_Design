@@ -16,16 +16,16 @@ royals = ["J", "Q", "K", "A"]
 #using loops and append to add our content to numberCards :
 for i in range(2,11):
     numberCards.append(str(i))
-    #this adds numbers 2-10 and converts them to string data
+#this adds numbers 2-10 and converts them to string data
 
 for j in range(4):
     numberCards.append(royals[j])
-    #this will add the card faces to the base list
+#this will add the card faces to the base list
 #Create full deck
 for k in range(4):   # four suits
     for l in range(13): #13 cards per suit
         card = (numberCards[l] + " " + suits[k])
-        #this makes each card, cycling through suits, but first through faces
+    #this makes each card, cycling through suits, but first through faces
         deck.append(card)
         #this adds the information to the "full deck" we want to make
 #you can print the deck here, if you want to see how it looks
@@ -59,6 +59,9 @@ plyr1=0
 plyr2=0
 ExtraDeckP1=[]
 ExtraDeckP2=[]
+flag2=False
+flag1=False
+
 #ask user to hit a key to release cards
 
 def GamePlay(): 
@@ -67,6 +70,8 @@ def GamePlay():
     global plyr2
     global ExtraDeckP1
     global ExtraDeckP2
+    global flag2
+    global flag1
     for i in range (0,halfDeck):
         click=input("Press any key to get cards:")
         print("Player 1     Player 2")
@@ -80,12 +85,17 @@ def GamePlay():
             ExtraDeckP2.extend(player1)
             ExtraDeckP2.extend(player2) 
         print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
-        if len(player1)>len(player2):
-                player1.extend(ExtraDeckP1)
-                halfDeck=len(player1)
-        elif len(player1)<len(player2):
-                player2.extend(ExtraDeckP2)
-                halfDeck=len(player2)
+        # if plyr1+plyr2==26:
+        #     if plyr1>plyr2:
+        #         flag2=True
+        #         if flag2==True:
+        #             player2.extend(ExtraDeckP2)
+        #             flag2=False
+        #     if plyr2>plyr1:
+        #         flag1=True     
+        #         if flag1:
+        #             player1.extend(ExtraDeckP1)
+        #             flag1=False   
                 
                 
 GamePlay()
