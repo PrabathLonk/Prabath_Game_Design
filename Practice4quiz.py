@@ -7,13 +7,21 @@ os.system('cls')
 
 #Define our variables and ask the user for our inputs
 print("Pick 3 unique numbers and the computer will tell you which one is the greatest")
-Number1=input("What is your first number choice:")
+Number1=int(input("What is your first number choice:"))
 Number2=input("What is your second number choice:")
 Number3=input("What is your third number choice:")
 #Create a function to list the order of the number and do checks for value errors
 
-check=True
-# while check==True:
+# check1=True
+# while check1==True:
+#     try:
+#         Number1=int(input("What is your first number choice:"))
+#         if :
+#             check1=False
+#     except ValueError:
+#         print("THATS NOT A NUMBER")
+
+
 
 
 
