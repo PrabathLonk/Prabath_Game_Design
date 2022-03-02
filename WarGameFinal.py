@@ -72,7 +72,7 @@ def GamePlay():
     global ExtraDeckP2
     global flag2
     global flag1
-    for i in range (0,halfDeck):
+    for i in range (0,52):
         click=input("Press any key to get cards:")
         print("Player 1     Player 2")
         print("     "+player1[i]+"      "+player2[i])
@@ -85,17 +85,17 @@ def GamePlay():
             ExtraDeckP2.extend(player1)
             ExtraDeckP2.extend(player2) 
         print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
-        # if plyr1+plyr2==26:
-        #     if plyr1>plyr2:
-        #         flag2=True
-        #         if flag2==True:
-        #             player2.extend(ExtraDeckP2)
-        #             flag2=False
-        #     if plyr2>plyr1:
-        #         flag1=True     
-        #         if flag1:
-        #             player1.extend(ExtraDeckP1)
-        #             flag1=False   
+        if plyr1+plyr2==26:
+            if ExtraDeckP2>ExtraDeckP1:
+                flag2=True
+                if flag2==True:
+                    player2.extend(ExtraDeckP2)
+                    flag2=False
+            if ExtraDeckP1>ExtraDeckP2:
+                flag1=True     
+                if flag1:
+                    player1.extend(ExtraDeckP1)
+                    flag1=False   
                 
                 
 GamePlay()
