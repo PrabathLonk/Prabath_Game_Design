@@ -30,9 +30,9 @@ m=[47,192,229]
 
 # create a window/screen
 
-WIDTH=600
+WIDTH=600 #<-- Constants
 
-HEIGHT=700
+HEIGHT=700 #<-- Constants
 
 screen=p.display.set_mode((WIDTH,HEIGHT))
 
