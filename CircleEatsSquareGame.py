@@ -7,7 +7,6 @@
 # If the circle eats the square it becomes larger and a new square will appear
 
 import os, random, time, pygame
-from turtle import circle
 #Initialize pygame, you also have the option to import it as p or pg
 pygame.init()
 
