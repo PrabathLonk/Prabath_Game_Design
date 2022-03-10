@@ -7,7 +7,6 @@
 # If the circle eats the square it becomes larger and a new square will appear
 
 import os, random, time, pygame
-from sre_constants import JUMP
 #Initialize pygame, you also have the option to import it as p or pg
 pygame.init()
 
@@ -26,9 +25,14 @@ wbox=30
 hbox=30
 # Circle radius
 CRadius=15
+#dimesions for the hitbox
+HitLenght=CRadius*2
+HitWidth=CRadius*2
 # Circle random start point (making sure the circle doesn't appear partly offscreen)
-xc=random.randint(CRadius,WIDTH-CRadius)
-yc=random.randint(CRadius,HEIGHT-CRadius)
+xc=random.randint(CRadius,WIDTH-(2*CRadius))
+yc=random.randint(CRadius,HEIGHT-(2*CRadius))
+HitX=xc-15
+HitY=yc-15
 # create the objects
 #Our screen:
 screen=pygame.display.set_mode((WIDTH,HEIGHT))
@@ -36,6 +40,9 @@ pygame.display.set_caption("Circle Eats Square")
 # "Rect" stands for the rectangle shape type
 #The measurments go in x position, y position, width, height 
 square=pygame.Rect(xs,ys,wbox,hbox)
+
+#Dimesions of the circle hitbox
+hitbox=pygame.Rect(HitX,HitY,HitWidth,HitLenght)
 
 
 #Create the screen
@@ -48,6 +55,7 @@ colors={'white':[255,255,255], 'red':[255,0,0], 'orange':[255,85,0], 'purple':[4
 background=colors.get('pink')
 s_color=colors.get('navy')
 c_color=colors.get('white')
+Hit_color=colors.get('orange')
 
 #Define the jump function
 MAX=10
@@ -90,12 +98,16 @@ while check:
     # Circle Movements
     if keys[pygame.K_LEFT] and xc>=move+CRadius:
         xc-=move #subtract
+        HitX-=move
     if keys[pygame.K_RIGHT] and xc<=WIDTH-(CRadius+move):
         xc+=move
+        HitX+=move
     if keys[pygame.K_UP] and yc>=move+CRadius:
         yc-=move
+        HitY-=move
     if keys[pygame.K_DOWN] and yc<=HEIGHT-(CRadius+move):
         yc+=move
+        HitY+=move
     #Making the collision
     checkCollide= square.collidepoint(xc,yc)
     if checkCollide==True:
@@ -104,6 +116,7 @@ while check:
         CRadius+=move
 
     pygame.draw.rect(screen,s_color,square)
+    pygame.draw.rect(screen,Hit_color,hitbox)
     pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
 
     #Display the screen and shapes via updating (for testing)
