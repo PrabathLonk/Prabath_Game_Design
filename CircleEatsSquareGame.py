@@ -7,6 +7,7 @@
 # If the circle eats the square it becomes larger and a new square will appear
 
 import os, random, time, pygame
+from sre_constants import JUMP
 #Initialize pygame, you also have the option to import it as p or pg
 pygame.init()
 
@@ -48,7 +49,11 @@ background=colors.get('pink')
 s_color=colors.get('navy')
 c_color=colors.get('white')
 
-#Define the circle
+#Define the jump function
+MAX=10
+jumpCount=MAX
+JUMP=False
+
 
 
 #make a function for our game
@@ -62,24 +67,41 @@ while check:
         if case.type==pygame.QUIT:
             check=False
     keys=pygame.key.get_pressed() #<-- To check if a key gets pressed (classified as a list), the 'and move' part has to do with creating boundries
+    # Movements for the square
     if keys[pygame.K_a] and square.x>=move:
         square.x-=move #subtract
-    if keys[pygame.K_d] and square.x<=WIDTH-wbox:
+    if keys[pygame.K_d] and square.x<=WIDTH-(wbox+move):
         square.x+=move
-    if keys[pygame.K_w] and square.y>=move:
-        square.y-=move
-    if keys[pygame.K_s] and square.y<=HEIGHT-hbox:
-        square.y+=move
+    #Jumping
+    if not JUMP:
+        if keys[pygame.K_w] and square.y>=move:
+            square.y-=move
+        if keys[pygame.K_s] and square.y<=HEIGHT-(hbox+move):
+            square.y+=move
+        if keys[pygame.K_SPACE]:
+            JUMP=True
+    else:
+        if jumpCount>=-MAX:
+            square.y-=jumpCount*abs(jumpCount)/2
+            jumpCount-=1
+        else:
+            jumpCount=MAX
+            JUMP=False
     # Circle Movements
-    if keys[pygame.K_LEFT] and xc>=move:
+    if keys[pygame.K_LEFT] and xc>=move+CRadius:
         xc-=move #subtract
-    if keys[pygame.K_RIGHT] and xc<=WIDTH-CRadius:
+    if keys[pygame.K_RIGHT] and xc<=WIDTH-(CRadius+move):
         xc+=move
-    if keys[pygame.K_UP] and yc>=move:
+    if keys[pygame.K_UP] and yc>=move+CRadius:
         yc-=move
-    if keys[pygame.K_DOWN] and yc<=HEIGHT-CRadius:
+    if keys[pygame.K_DOWN] and yc<=HEIGHT-(CRadius+move):
         yc+=move
-
+    #Making the collision
+    checkCollide= square.collidepoint(xc,yc)
+    if checkCollide==True:
+        square.x=random.randint(wbox,WIDTH-wbox)
+        square.y=random.randint(hbox,HEIGHT-hbox)
+        CRadius+=move
 
     pygame.draw.rect(screen,s_color,square)
     pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
