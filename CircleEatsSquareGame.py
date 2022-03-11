@@ -118,6 +118,9 @@ while check:
     pygame.draw.rect(screen,s_color,square)
     pygame.draw.rect(screen,Hit_color,hitbox)
     pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
+    if CRadius==65:
+        print("The circle player has won the game! Click the 'x' to quit.")
+        check=False
 
     #Display the screen and shapes via updating (for testing)
     pygame.display.update()
