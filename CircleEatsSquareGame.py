@@ -7,6 +7,7 @@
 # If the circle eats the square it becomes larger and a new square will appear
 
 import os, random, time, pygame
+os.system('cls')
 #Initialize pygame, you also have the option to import it as p or pg
 pygame.init()
 
@@ -55,7 +56,7 @@ colors={'white':[255,255,255], 'red':[255,0,0], 'orange':[255,85,0], 'purple':[4
 background=colors.get('pink')
 s_color=colors.get('navy')
 c_color=colors.get('white')
-Hit_color=colors.get('orange')
+Hit_color=colors.get('pink')
 
 #Define the jump function
 MAX=10
@@ -98,28 +99,30 @@ while check:
     # Circle Movements
     if keys[pygame.K_LEFT] and xc>=move+CRadius:
         xc-=move #subtract
-        HitX-=move
+        hitbox.x-=move
     if keys[pygame.K_RIGHT] and xc<=WIDTH-(CRadius+move):
         xc+=move
-        HitX+=move
+        hitbox.x+=move
     if keys[pygame.K_UP] and yc>=move+CRadius:
         yc-=move
-        HitY-=move
+        hitbox.y-=move
     if keys[pygame.K_DOWN] and yc<=HEIGHT-(CRadius+move):
         yc+=move
-        HitY+=move
+        hitbox.y+=move
     #Making the collision
-    checkCollide= square.collidepoint(xc,yc)
+    checkCollide= square.colliderect(hitbox)
     if checkCollide==True:
         square.x=random.randint(wbox,WIDTH-wbox)
         square.y=random.randint(hbox,HEIGHT-hbox)
         CRadius+=move
+        HitWidth+=move
+        HitLenght+=move
 
     pygame.draw.rect(screen,s_color,square)
     pygame.draw.rect(screen,Hit_color,hitbox)
     pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
     if CRadius==65:
-        print("The circle player has won the game! Click the 'x' to quit.")
+        print("The circle player has won the game! Congrats! Switch roles as see if you can beat that time! ")
         check=False
 
     #Display the screen and shapes via updating (for testing)
