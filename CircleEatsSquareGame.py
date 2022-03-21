@@ -52,11 +52,27 @@ pygame.display.set_mode((WIDTH,HEIGHT))
 #Define our colors in a dictionary
 colors={'white':[255,255,255], 'red':[255,0,0], 'orange':[255,85,0], 'purple':[48,25,52,],'aqua':[102,193,255], 'pink': [200,3,75], 'black':[0,0,0], 'navy':[5,31,64]}
 
+#Getting a random color:
+RandColor=random.choice(list(colors))
 #Call colors to get colors for our screen and shapes
-background=colors.get('pink')
-s_color=colors.get('navy')
-c_color=colors.get('white')
-Hit_color=colors.get('pink')
+background=colors.get('white')
+# s_color=colors.get('navy') <--- Previous square color
+c_color=colors.get('navy')
+Hit_color=colors.get('white')
+# Creating a color check to make sure our colors are all different:
+def ChangeColor():
+    global RandColor
+    ColorCheck=True
+    while ColorCheck==True:
+        RandColor=random.choice(list(colors)) #<--- Getting a random color for the square
+        if RandColor==background or RandColor==c_color:
+            RandColor=random.choice(list(colors))
+        else:
+            ColorCheck=False
+
+ChangeColor()
+s_color=colors.get(RandColor) #<--- Getting a random color for the square
+
 
 #Define the jump function
 MAX=10
@@ -117,11 +133,14 @@ while check:
         CRadius+=move
         HitWidth+=move
         HitLenght+=move
+        ColorCheck=True
+        ChangeColor()
+        s_color=colors.get(RandColor)
 
     pygame.draw.rect(screen,s_color,square)
     pygame.draw.rect(screen,Hit_color,hitbox)
     pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
-    if CRadius==65:
+    if CRadius==80:
         print("The circle player has won the game! Congrats! Switch roles as see if you can beat that time! ")
         check=False
 
