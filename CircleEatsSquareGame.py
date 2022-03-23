@@ -65,7 +65,7 @@ def ChangeColor():
     ColorCheck=True
     while ColorCheck==True:
         RandColor=random.choice(list(colors)) #<--- Getting a random color for the square
-        if RandColor==background or RandColor==c_color:
+        if colors.get(RandColor)==background:
             RandColor=random.choice(list(colors))
         else:
             ColorCheck=False
