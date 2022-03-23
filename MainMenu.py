@@ -12,7 +12,10 @@ wbox=30
 hbox=30
 
 # Menu List
-menuList=['INSTRUCTIONS',"SETTINGS","LEVEL 1","LEVEL 2", "LEVEL 3",'Scoreboard','Exit']
+menuList=['INSTRUCTIONS (Press 1)',"SETTINGS (Press 2)","LEVEL 1 (Press 3)","LEVEL 2 (Press 4)", "LEVEL 3 (Press 5)",'Scoreboard (Press 6)','Exit (Press 7)']
+
+#Define our mouse click
+keys=pygame.key.get_pressed
 
 colors={'white':[255,255,255], 'red':[255,0,0], 'orange':[255,85,0], 'purple':[48,25,52,],'aqua':[102,193,255], 'pink': [200,3,75], 'black':[0,0,0], 'navy':[5,31,64], 'white':[252,252,252], 'key lime': [198,227,171], 'seabreeze':[46,223,227]}
 #Getting a random color:
@@ -24,6 +27,8 @@ c_color=colors.get('navy')
 Hit_color=colors.get('white')
 # SCREEN/Set our window size
 window=pygame.display.set_mode((WIDTH,HEIGHT))
+# open a new window
+window2=pygame.display.set_mode((WIDTH,HEIGHT))
 #Set our caption:
 pygame.display.set_caption("Circle Eat Square Menu")
 # Create fonts
@@ -46,14 +51,14 @@ def instructions():
         # Put our text on screen after coloring the screen
         window.fill((255,255,255))
         #Blit is what shows and writes our text
-        window.blit(text,(20,50))
-        window.blit(instructions,(20,200))
-        window.blit(instructions2,(20,230))
-        window.blit(instructions3,(20,260))
-        window.blit(instructions4,(20,290))
-        window.blit(instructions5,(20,320))
-        window.blit(instructions6,(20,350))
-        window.blit(BackButton,(250,500))
+        window2.blit(text,(20,50))
+        window2.blit(instructions,(20,200))
+        window2.blit(instructions2,(20,230))
+        window2.blit(instructions3,(20,260))
+        window2.blit(instructions4,(20,290))
+        window2.blit(instructions5,(20,320))
+        window2.blit(instructions6,(20,350))
+        window2.blit(BackButton,(250,500))
         #Update our display 
         pygame.display.update()
         # Set a delay for us to see
@@ -86,4 +91,8 @@ for i in range(7):
 
 SelectSquare=pygame.Rect(xs,ys,wbox,hbox)
 pygame.display.update()
-pygame.time.delay(1000)
+pygame.time.delay(10000)
+
+def clickBox():
+    if keys[pygame.K_1]:
+        instructions()
