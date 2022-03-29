@@ -149,6 +149,11 @@ while check:
         screen.fill(background)
         TitleMenu("MENU")
         MainMenu(MenuList)
+    if SETT:
+        TitleMenu("SETTINGS")
+        SettMenu(SettingList)
+        BackButton=MENU_FONT.render("BACK",1,(0,0,0))
+        screen.blit(BackButton,(250,500))
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
             check=False
@@ -178,14 +183,9 @@ while check:
             screen.blit(instructions6,(20,350))
             screen.blit(BackButton,(250,500))
         elif ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >300 and mouse_pos[1] <340)) or SETT:
-            Main=False
+            MAIN=False
             screen.fill(background)
-            TitleMenu("SETTINGS")
             SETT=True
-            if SETT==True:
-                SettMenu(SettingList)
-                BackButton=MENU_FONT.render("BACK",1,(0,0,0))
-                screen.blit(BackButton,(250,500))
             
             
 
