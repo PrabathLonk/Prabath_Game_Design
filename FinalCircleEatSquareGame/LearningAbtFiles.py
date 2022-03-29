@@ -17,7 +17,7 @@ name="Jesse"
 print(date.strftime('%m/%d/%Y')) # This is to reorder the date into month, day, year order (which allows us to use this function to rearrange the date to how we like)
 
 #You must convert something to a string to add it to a file
-scoreLine=str(score)+' '+name+' '+date.strftime('%m/%d/%Y'+'\n') #This converts the score to a string and combines it with the name and the date
+scoreLine='\n'+str(score)+' '+name+' '+date.strftime('%m/%d/%Y'+'\n') #This converts the score to a string and combines it with the name and the date
 print(scoreLine)
 scoreLine2=str(score2)+' '+name2+' '+date.strftime('%m/%d/%Y''\n') #This converts the score to a string and combines it with the name and the date
 print(scoreLine2)
