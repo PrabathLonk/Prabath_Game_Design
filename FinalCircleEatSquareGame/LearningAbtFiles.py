@@ -17,11 +17,11 @@ name="Jesse"
 print(date.strftime('%m/%d/%Y')) # This is to reorder the date into month, day, year order (which allows us to use this function to rearrange the date to how we like)
 
 #You must convert something to a string to add it to a file
-scoreLine=str(score)+' '+name+' '+(date.strftime('%m/%d/%Y')) #This converts the score to a string and combines it with the name and the date
+scoreLine=str(score)+' '+name+' '+date.strftime('%m/%d/%Y'+'\n') #This converts the score to a string and combines it with the name and the date
 print(scoreLine)
-scoreLine2=str(score2)+' '+name2+' '+(date.strftime('%m/%d/%Y')) #This converts the score to a string and combines it with the name and the date
+scoreLine2=str(score2)+' '+name2+' '+date.strftime('%m/%d/%Y''\n') #This converts the score to a string and combines it with the name and the date
 print(scoreLine2)
-MyFile=open('FinalCircleEatSquareGame\highscore.txt','a') # BY using the relative path we can open the highscore text file 
+MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a') # BY using the relative path we can open the highscore text file 
 MyFile.write(scoreLine) # This writes out score in the file
 MyFile.write(scoreLine2)
 MyFile.close() # This closes the file once the program is done writing
