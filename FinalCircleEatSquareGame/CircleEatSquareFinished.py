@@ -209,10 +209,10 @@ def ActualGame():
     #Getting a random color:
     RandColor=random.choice(list(colors))
     #Call colors to get colors for our screen and shapes
-    background=colors.get('white')
+    background=colors.get('aqua')
     # s_color=colors.get('navy') <--- Previous square color
-    c_color=colors.get('navy')
-    Hit_color=colors.get('white')
+    c_color=colors.get('black')
+    Hit_color=colors.get('aqua')
     # Creating a color check to make sure our colors are all different:
     def ChangeColor():
         global RandColor
