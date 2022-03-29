@@ -162,7 +162,7 @@ def ActualGame():
     global MAX
     global HitLenght
     global HitWidth
-    global ChangeColor
+    global changeColor
     global HitX
     global HitY
     global ColorCheck
@@ -214,17 +214,19 @@ def ActualGame():
     c_color=colors.get('black')
     Hit_color=colors.get('aqua')
     # Creating a color check to make sure our colors are all different:
-    def ChangeColor():
-        global RandColor
-        ColorCheck=True
-        while ColorCheck==True:
-            RandColor=random.choice(list(colors)) #<--- Getting a random color for the square
-            if colors.get(RandColor)==background:
-                RandColor=random.choice(list(colors))
+    def changeColor():
+        global randColor
+        colorCheck=True
+        while colorCheck:
+            randColor=random.choice(list(colors))
+            if colors.get(randColor)==background:
+                print(randColor)
+                print(background)
+                randColor=random.choice(list(colors))
             else:
-                ColorCheck=False
+                colorCheck=False
 
-    ChangeColor()
+    changeColor()
     s_color=colors.get(RandColor) #<--- Getting a random color for the square
 
 
@@ -280,10 +282,9 @@ def ActualGame():
             CRadius+=move
             HitWidth+=move
             HitLenght+=move
+            changeColor()
             ColorCheck=True
-            ChangeColor()
-            s_color=colors.get(RandColor)
-
+            RandColor=random.choice(list(colors-'aqua'))
         pygame.draw.rect(screen,s_color,square)
         pygame.draw.rect(screen,Hit_color,hitbox)
         pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
