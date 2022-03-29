@@ -25,5 +25,10 @@ MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a') # BY using the relati
 MyFile.write(scoreLine) # This writes out score in the file
 MyFile.write(scoreLine2)
 MyFile.close() # This closes the file once the program is done writing
-
 # If we look at the file we see that the previous text was deletd and replaced by the new text, so be careful when writing into a new file
+MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'r')
+lines=MyFile.readline()
+print(lines)
+lines=MyFile.readline()
+print(lines)
+MyFile.close()
