@@ -1,1 +1,2 @@
-123 Jesse 03/29/2022123 Jesse 03/29/2022123 Jesse 03/29/2022333 Timmy 03/29/2022
+Hello there!
+This is where the scores are stored for circle eat square game

@@ -35,7 +35,7 @@ INST=False
 SETT=False
 LEV_I=False
 #List f messages
-MenuList=['Instructions','Settings', "Play Game","Exit",'Scoreboard','asdasd']
+MenuList=['Instructions','Settings', "Play Game","Exit",'Scoreboard']
 SettingList=['Screen Size','Font Size','Circle Color','Background Color']
 check=True #for the while loop
 move=5 #pixels
@@ -88,16 +88,23 @@ def TitleMenu(Message):
 
 
 #Create square fr menu
-
+xSett=100
+ySett=250
+settW=30
+SettH=30
 squareM=pygame.Rect(xMs,yMs,wb,hb)
+squareSet=pygame.Rect(xSett,ySett,settW,SettH)
 #This is a function uses a parameter
 def MainMenu(Mlist):
+    global txtx
+    global txty
     txty=243
+    txtx=90
     squareM.y=250
     for i in range(len(Mlist)):
         message=Mlist[i]
         text=INST_FNT.render(message,1,(51,131,51))
-        screen.blit(text,(90,txty))
+        screen.blit(text,(txtx,txty))
         pygame.draw.rect(screen,sqM_color, squareM )
         squareM.y +=50
         txty+=50
@@ -114,6 +121,19 @@ def changeColor():
             randColor=random.choice(list(colors))
         else:
             colorCheck=False
+def SettMenu(Mlist):
+    global txtS
+    global txtSS
+    txtS=243
+    txtSS=145
+    squareSet.y=250
+    for i in range(len(Mlist)):
+        message=Mlist[i]
+        text=INST_FNT.render(message,1,(51,131,51))
+        screen.blit(text,(txtSS,txtS))
+        pygame.draw.rect(screen,sqM_color, squareSet )
+        squareSet.y +=50
+        txtS+=50
 
 #sq_color=colors.get('navy')
 #Making a rand c f the square
@@ -125,7 +145,6 @@ MAX=10
 jumpCount=MAX
 JUMP=False
 while check:
-    
     if MAIN:
         screen.fill(background)
         TitleMenu("MENU")
@@ -163,9 +182,11 @@ while check:
             screen.fill(background)
             TitleMenu("SETTINGS")
             SETT=True
-            MainMenu(SettingList)
-            BackButton=MENU_FONT.render("BACK",1,(0,0,0))
-            screen.blit(BackButton,(250,500))
+            if SETT==True:
+                SettMenu(SettingList)
+                BackButton=MENU_FONT.render("BACK",1,(0,0,0))
+                screen.blit(BackButton,(250,500))
+            
             
 
 
