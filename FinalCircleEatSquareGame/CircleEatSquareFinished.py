@@ -208,6 +208,7 @@ def ActualGame():
 
     #Getting a random color:
     RandColor=random.choice(list(colors))
+    print(RandColor)
     #Call colors to get colors for our screen and shapes
     background=colors.get('aqua')
     # s_color=colors.get('navy') <--- Previous square color
@@ -227,7 +228,7 @@ def ActualGame():
                 colorCheck=False
 
     changeColor()
-    s_color=colors.get(RandColor) #<--- Getting a random color for the square
+    s_color=colors.get('pink') #<--- Getting a random color for the square
 
 
     #make a function for our game
@@ -284,7 +285,7 @@ def ActualGame():
             HitLenght+=move
             changeColor()
             ColorCheck=True
-            RandColor=random.choice(list(colors-'aqua'))
+            # RandColor=random.choice(list(colors-'aqua'))
         pygame.draw.rect(screen,s_color,square)
         pygame.draw.rect(screen,Hit_color,hitbox)
         pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
@@ -299,7 +300,7 @@ def ActualGame():
 #sq_color=colors.get('navy')
 #Making a rand c f the square
 changeColor()
-sq_color=colors.get(randColor)
+sq_color=colors.get('pink')
 
 
 MAX=10
