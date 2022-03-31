@@ -142,10 +142,9 @@ def ScoreB():
     global yi
     global stuff
     global ScoreDraw
-    print("Scores:")
     MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a')
     yi=150
-    stuff=MyFile.readlines
+    stuff=MyFile.readlines()
     print(stuff)
     for line in stuff:
         print(line)
@@ -412,6 +411,12 @@ while check:
             MAIN=False
             screen.fill(background)
             SCORE=True
+            if ((mouse_pos[0] >200 and mouse_pos[0] <540) and (mouse_pos[1] >500 and mouse_pos[1] <540)):
+                screen.fill(background)
+                SETT=False
+                MAIN=True
+                TitleMenu("MENU")
+                MainMenu(MenuList)
         elif ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >450 and mouse_pos[1] <490)):
             quit()
             
