@@ -15,14 +15,16 @@
 # K_s                   down square
 # K_SPACE               jump
 #initialize pygame
-import os, random, time, pygame, math
+import os, random, time, pygame, math, datetime
 #initialize pygame
 pygame.init()
-
+os.system('cls')
 #Declare constants, variables, list, dictionaries, any object
 TITLE_FONT=pygame.font.SysFont('georgia',50) #<-- First pice of text within parenthsis is the name of the font, and the number is the height of the letters
 MENU_FONT=pygame.font.SysFont('comicsans',40)
 INSTRUCTION_FONT=pygame.font.SysFont('proxmanova',35)
+date=datetime.datetime.now()
+name=input("What is your name:")
 #scree size
 WIDTH=700
 HEIGHT=700
@@ -34,7 +36,7 @@ MAIN=True
 INST=False
 SETT=False
 GAME=False
-LEV_I=False
+SCORE=False
 #List f messages
 MenuList=['Instructions','Settings', "Play Game","Exit",'Scoreboard']
 SettingList=['Screen Size','Font Size','Circle Color','Background Color']
@@ -49,7 +51,7 @@ hbox=30
 rad=15
 xc=random.randint(rad, WIDTH-rad)
 yc=random.randint(rad, HEIGHT-rad)
-
+stuff=' '
 #inscribed Square:
 ibox=int(rad*math.sqrt(2))
 startpoint = (int(xc-ibox/2),int(yc-ibox/2))
@@ -135,6 +137,29 @@ def SettMenu(Mlist):
         pygame.draw.rect(screen,sqM_color, squareSet )
         squareSet.y +=50
         txtS+=50
+def ScoreB():
+    global MyFile
+    global yi
+    global stuff
+    global ScoreDraw
+    print("Scores:")
+    MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a')
+    yi=150
+    stuff=MyFile.readlines
+    print(stuff)
+    for line in stuff:
+        print(line)
+        ScoreDraw=INST_FNT.render(line,1,(0,0,0))
+        screen.blit(ScoreDraw,(40,yi))
+        pygame.display.update()
+        yi+=45
+    MyFile.close()
+def keepScore(score):
+    global date
+    global scoreLine
+    date=datetime.datetime.now()
+    print(date.strftime('%d/%m/%Y'))
+    scoreLine=str(score)+"\t"+name+"\t"+date.strftime('%d/%m/%Y')
 MAX=10
 jumpCount=MAX
 JUMP=False
@@ -145,6 +170,7 @@ HitLenght=CRadius*2
 HitWidth=CRadius*2
 hitbox=pygame.Rect(HitX,HitY,HitWidth,HitLenght)
 move=5
+score=0
 ColorCheck=False
 def ActualGame():
     global move
@@ -166,6 +192,11 @@ def ActualGame():
     global HitX
     global HitY
     global ColorCheck
+    global score
+    global date
+    global name
+    global scoreLine
+    global MyFile
     move=5 #pixels
     # Declare constant variables, list, dictionaries
     #Capitalize to clarify constants
@@ -291,8 +322,12 @@ def ActualGame():
         pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
         if CRadius==80:
             print("The circle player has won the game! Congrats! Switch roles as see if you can beat that time! ")
+            score=80
             check=False
-
+            scoreLine='\n'+str(score)+' '+name+' '+date.strftime('%m/%d/%Y'+'\n')
+            MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a') # BY using the relative path we can open the highscore text file 
+            MyFile.write(scoreLine)
+            MyFile.close()
         #Display the screen and shapes via updating (for testing)
         pygame.display.update()
         #Add a delay so that we can see our shapes (for testing)
@@ -318,6 +353,11 @@ while check:
         screen.blit(BackButton,(200,500))
     if GAME:
         ActualGame()
+    if SCORE:
+        ScoreB()
+        SettMenu(SettingList)
+        BackButton=MENU_FONT.render("BACK",1,(0,0,0))
+        screen.blit(BackButton,(200,500))
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
             check=False
@@ -365,6 +405,10 @@ while check:
         elif ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >350 and mouse_pos[1] <390)) or GAME:
             screen.fill(background)
             ActualGame()
+        elif ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >400 and mouse_pos[1] <440)) or SCORE:
+            MAIN=False
+            screen.fill(background)
+            SCORE=True
             
 
 
