@@ -25,6 +25,7 @@ MENU_FONT=pygame.font.SysFont('comicsans',40)
 INSTRUCTION_FONT=pygame.font.SysFont('proxmanova',35)
 date=datetime.datetime.now()
 name=input("What is your name:")
+ticksStart=pygame.time.get_ticks()
 #scree size
 WIDTH=700
 HEIGHT=700
@@ -320,9 +321,11 @@ def ActualGame():
         pygame.draw.rect(screen,s_color,square)
         pygame.draw.rect(screen,Hit_color,hitbox)
         pygame.draw.circle(screen,c_color,(xc,yc),CRadius)
-        if CRadius==80:
+        if CRadius==50:
+            global ticksEnd
             print("The circle player has won the game! Congrats! Switch roles as see if you can beat that time! ")
-            score=80
+            ticksEnd=pygame.time.get_ticks()
+            score=100000-(ticksEnd-ticksStart)
             check=False
             scoreLine='\n'+str(score)+' '+name+' '+date.strftime('%m/%d/%Y'+'\n')
             MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a') # BY using the relative path we can open the highscore text file 
