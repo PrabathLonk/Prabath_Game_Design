@@ -25,7 +25,6 @@ MENU_FONT=pygame.font.SysFont('comicsans',40)
 INSTRUCTION_FONT=pygame.font.SysFont('proxmanova',35)
 date=datetime.datetime.now()
 name=input("What is your name:")
-ticksStart=pygame.time.get_ticks()
 #scree size
 WIDTH=700
 HEIGHT=700
@@ -202,6 +201,7 @@ def ActualGame():
     # Declare constant variables, list, dictionaries
     #Capitalize to clarify constants
     #Screen size
+    ticksStart=pygame.time.get_ticks()
     WIDTH=700
     HEIGHT=700
     check=True #<-- For while loop
@@ -327,7 +327,7 @@ def ActualGame():
             ticksEnd=pygame.time.get_ticks()
             score=100000-(ticksEnd-ticksStart)
             check=False
-            scoreLine='\n'+str(score)+' '+name+' '+date.strftime('%m/%d/%Y'+'\n')
+            scoreLine=str(score)+' '+name+' '+date.strftime('%m/%d/%Y'+'\n')
             MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a') # BY using the relative path we can open the highscore text file 
             MyFile.write(scoreLine)
             MyFile.close()
@@ -357,7 +357,7 @@ while check:
     if GAME:
         ActualGame()
     if SCORE:
-        TitleMenu("HIGHSCORES")
+        TitleMenu("SCORES")
         ScoreB()
         BackButton=MENU_FONT.render("BACK",1,(0,0,0))
         screen.blit(BackButton,(200,500))
