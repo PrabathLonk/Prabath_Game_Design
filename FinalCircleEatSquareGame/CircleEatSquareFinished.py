@@ -38,7 +38,7 @@ SETT=False
 GAME=False
 SCORE=False
 #List f messages
-MenuList=['Instructions','Settings', "Play Game","Exit",'Scoreboard']
+MenuList=['Instructions','Settings', "Play Game","Scoreboard",'Exit']
 SettingList=['Screen Size','Font Size','Circle Color','Background Color']
 check=True #for the while loop
 move=5 #pixels
