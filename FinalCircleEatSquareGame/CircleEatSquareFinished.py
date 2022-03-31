@@ -314,7 +314,7 @@ while check:
     if SETT:
         TitleMenu("SETTINGS")
         SettMenu(SettingList)
-        BackButton=MENU_FONT.render("BACK (Press ESC)",1,(0,0,0))
+        BackButton=MENU_FONT.render("BACK",1,(0,0,0))
         screen.blit(BackButton,(200,500))
     if GAME:
         ActualGame()
@@ -338,7 +338,7 @@ while check:
             instructions4=INSTRUCTION_FONT.render("keys. The square can hit space to get a vertical jump.",1,(0,0,255))
             instructions5=INSTRUCTION_FONT.render("Once a circle reaches a certain size, the circle player wins",1,(0,0,255))
             instructions6=INSTRUCTION_FONT.render("Try timing youself to try and get your best time as the circle",1,(0,0,255))
-            BackButton=MENU_FONT.render("BACK (Press ESC)",1,(0,0,0))
+            BackButton=MENU_FONT.render("BACK",1,(0,0,0))
             screen.blit(instructions,(20,200))
             screen.blit(instructions2,(20,230))
             screen.blit(instructions3,(20,260))
