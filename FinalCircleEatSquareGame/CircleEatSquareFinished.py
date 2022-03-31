@@ -354,8 +354,8 @@ while check:
     if GAME:
         ActualGame()
     if SCORE:
+        TitleMenu("HIGHSCORES")
         ScoreB()
-        SettMenu(SettingList)
         BackButton=MENU_FONT.render("BACK",1,(0,0,0))
         screen.blit(BackButton,(200,500))
     for case in pygame.event.get():
@@ -409,6 +409,8 @@ while check:
             MAIN=False
             screen.fill(background)
             SCORE=True
+        elif ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >450 and mouse_pos[1] <490)):
+            quit()
             
 
 
