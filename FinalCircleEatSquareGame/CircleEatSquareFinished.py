@@ -164,7 +164,7 @@ def keepScore(score):
     global scoreLine
     date=datetime.datetime.now()
     print(date.strftime('%d/%m/%Y'))
-    scoreLine=str(score)+"\t"+name+"\t"+date.strftime('%d/%m/%Y')
+    scoreLine='\n'+str(score)+"\t"+name+"\t"+date.strftime('%d/%m/%Y')
 MAX=10
 jumpCount=MAX
 JUMP=False
