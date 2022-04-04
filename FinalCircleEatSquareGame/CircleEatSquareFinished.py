@@ -16,6 +16,7 @@
 # K_SPACE               jump
 #initialize pygame
 import os, random, time, pygame, math, datetime
+from pickle import FALSE
 #initialize pygame
 pygame.init()
 os.system('cls')
@@ -25,6 +26,7 @@ MENU_FONT=pygame.font.SysFont('comicsans',40)
 INSTRUCTION_FONT=pygame.font.SysFont('proxmanova',35)
 date=datetime.datetime.now()
 name=input("What is your name:")
+temp=[]
 #scree size
 WIDTH=700
 HEIGHT=700
@@ -138,21 +140,25 @@ def SettMenu(Mlist):
         squareSet.y +=50
         txtS+=50
 def ScoreB():
-    global MyFile
-    global yi
-    global stuff
-    global ScoreDraw
-    MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a')
+    global N
+    global temp
+    global SCORE
+    MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'r')
     yi=150
     stuff=MyFile.readlines()
-    print(stuff)
-    for line in stuff:
-        print(line)
-        ScoreDraw=INST_FNT.render(line,1,(0,0,0))
-        screen.blit(ScoreDraw,(40,yi))
-        pygame.display.update()
-        yi+=45
     MyFile.close()
+    stuff.sort()
+    N=len(stuff)-1
+    temp=[]
+    for i in range(N, -1, -1):
+        
+        # temp[j]=stuff[i]
+        # j+=1
+        textSCORE=INST_FNT.render(stuff[i],1,'black')
+        screen.blit(textSCORE,(40,yi))
+        # pygame.display.update()
+        # pygame.time.delay(50)
+        yi+=50
 def keepScore(score):
     global date
     global scoreLine
@@ -357,9 +363,17 @@ while check:
         ActualGame()
     if SCORE:
         TitleMenu("SCORES")
+        MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a')
         ScoreB()
         BackButton=MENU_FONT.render("BACK",1,(0,0,0))
         screen.blit(BackButton,(200,500))
+        pygame.display.update()
+        if ((mouse_pos[0] >200 and mouse_pos[0] <540) and (mouse_pos[1] >500 and mouse_pos[1] <540)):
+                screen.fill(background)
+                SCORE=False
+                MAIN=True
+                TitleMenu("MENU")
+                MainMenu(MenuList) 
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
             check=False
@@ -411,12 +425,6 @@ while check:
             MAIN=False
             screen.fill(background)
             SCORE=True
-            if ((mouse_pos[0] >200 and mouse_pos[0] <540) and (mouse_pos[1] >500 and mouse_pos[1] <540)):
-                screen.fill(background)
-                SETT=False
-                MAIN=True
-                TitleMenu("MENU")
-                MainMenu(MenuList)
         elif ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >450 and mouse_pos[1] <490)):
             quit()
             
