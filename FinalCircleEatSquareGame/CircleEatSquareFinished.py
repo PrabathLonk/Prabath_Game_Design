@@ -2,7 +2,7 @@
 #learning how to draw circles and rectangles
 #use keys to move objects
 #Using Dictionaries
-
+# PATH: C:\Users\GirishP25\OneDrive - Greenhill School\Desktop\New folder\Prabath_Game_Design\FinalCircleEatSquareGame
 #Objective of the game is for the rect to run away fom the circle, if they collide the circle etas the square, 
 #circle will  get larger, and a new rect should appear somewhere on the screen
 # K_UP                  up circle
@@ -16,7 +16,6 @@
 # K_SPACE               jump
 #initialize pygame
 import os, random, time, pygame, math, datetime
-from pickle import FALSE
 #initialize pygame
 pygame.init()
 os.system('cls')
@@ -64,7 +63,7 @@ square=pygame.Rect(xs,ys,wbox,hbox)
 
 #create screen
 screen=pygame.display.set_mode((WIDTH,HEIGHT))
-pygame.display.set_caption('Circle eats Square')
+pygame.display.set_caption('FINAL PROJECT MENU')
 
 #define colors
 colors={'white':[255,255,255], 'red':[255,0,0], 'aqua':[102,153, 255],
