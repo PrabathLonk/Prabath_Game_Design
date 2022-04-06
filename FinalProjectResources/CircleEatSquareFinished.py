@@ -393,25 +393,25 @@ while check:
             HEIGHT=800
             screen=pygame.display.set_mode((WIDTH,HEIGHT))
             screen.fill(background)
-            SIZE=False
-            MENU=True
-            pygame.display.update()
+            # SIZE=False
+            # MENU=True
+            # pygame.display.update()
         elif ((mouse_pos[0] >100 and mouse_pos[0] <130) and (mouse_pos[1] >350 and mouse_pos[1] <380)):
             WIDTH=900
             HEIGHT=900
             screen=pygame.display.set_mode((WIDTH,HEIGHT))
             screen.fill(background)
-            SIZE=False
-            MENU=True
-            pygame.display.update()
+            # SIZE=False
+            # MENU=True
+            # pygame.display.update()
         elif ((mouse_pos[0] >100 and mouse_pos[0] <130) and (mouse_pos[1] >400 and mouse_pos[1] <450)):
             WIDTH=1000
             HEIGHT=1000
             screen=pygame.display.set_mode((WIDTH,HEIGHT))
             screen.fill(background)
-            SIZE=False
-            MENU=True
-            pygame.display.update()   
+            # SIZE=False
+            # MENU=True
+            # pygame.display.update()   
     if GAME:
         ActualGame()
     if SCORE:
