@@ -1,17 +1,18 @@
 #Prabath Girish
 #4/9/22
 # Tutorial to create moving images
-import pygame
+import pygame, os
 pygame.init()
-
+os.system('cls')
 win = pygame.display.set_mode((500,480))
 pygame.display.set_caption("First Game")
 
 walkRight = [pygame.image.load('FinalProjectResources\Images\R1.png'), pygame.image.load('FinalProjectResources\Images\R2.png'), pygame.image.load('FinalProjectResources\Images\R3.png'), pygame.image.load('FinalProjectResources\Images\R4.png'), pygame.image.load('FinalProjectResources\Images\R5.png'), pygame.image.load('FinalProjectResources\Images\R6.png'), pygame.image.load('FinalProjectResources\Images\R7.png'), pygame.image.load('FinalProjectResources\Images\R8.png'), pygame.image.load('FinalProjectResources\Images\R9.png')]
 walkLeft = [pygame.image.load('FinalProjectResources\Images\L1.png'), pygame.image.load('FinalProjectResources\Images\L2.png'), pygame.image.load('FinalProjectResources\Images\L3.png'), pygame.image.load('FinalProjectResources\Images\L4.png'), pygame.image.load('FinalProjectResources\Images\L5.png'), pygame.image.load('FinalProjectResources\Images\L6.png'), pygame.image.load('FinalProjectResources\Images\L7.png'), pygame.image.load('FinalProjectResources\Images\L8.png'), pygame.image.load('FinalProjectResources\Images\L9.png')]
 bg = pygame.image.load('FinalProjectResources\Images\gb_ImageTutorial.jpg')
+bg2=pygame.image.load('FinalProjectResources\Images\Sunset.jpg')
 char = pygame.image.load('FinalProjectResources\Images\standing.png')
-
+thwomp= pygame.image.load('FinalProjectResources\Images\Thwomp.png')
 x = 50
 y = 400
 width = 40
@@ -32,12 +33,20 @@ def redrawGameWindow():
     global walkCount
     
     win.blit(bg, (0,0))  
+    win.blit(thwomp,(250,140))
     if walkCount + 1 >= 27:
         walkCount = 0
         
     if left:  
         win.blit(walkLeft[walkCount//3], (x,y))
-        walkCount += 1                          
+        walkCount += 1 
+        if ((x >140 and x < 170) and (y >250 and y <280)):  
+            # win.blit(char,(x,y-5)) 
+            # win.blit(char,(x,y-5)) 
+            # win.blit(char,(x,y-5))
+            print(x+"and"+y)
+            
+ 
     elif right:
         win.blit(walkRight[walkCount//3], (x,y))
         walkCount += 1
@@ -74,6 +83,19 @@ while run:
         left = False
         right = False
         walkCount = 0
+
+    if x== 480-80:
+        bg=bg2
+        y=400
+        x=0
+        win.blit(char,(x,y))
+        
+        
+    # if x==390 and y==540:
+    #     win.blit(bg2, (0,0)) 
+    #     x=0
+    #     y=480
+    #     win.blit(char, (x, y))
         
     if not(isJump):
         if keys[pygame.K_SPACE]:
