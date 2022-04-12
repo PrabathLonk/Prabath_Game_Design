@@ -212,7 +212,7 @@ def changeScreenSize(xm,ym):
  
 def playGame():
     global startTime
-    startTime=pygame.time.get_ticks
+    startTime=pygame.time.get_ticks()
     move=5 #pixels
     #square variables
     xs=20
@@ -308,9 +308,11 @@ def playGame():
             score=100000-(ticksEnd-startTime)
             run=False
             scoreLine=str(score)+' '+name+' '+date.strftime('%m/%d/%Y'+'\n')
-            MyFile=open('FinalCircleEatSquareGame\highscore.txt', 'a') # BY using the relative path we can open the highscore text file 
+            MyFile=open('FinalProjectResources\FinalCircleEatSquareGame\highscore.txt', 'a') # BY using the relative path we can open the highscore text file 
             MyFile.write(scoreLine)
-            MyFile.close()       
+            MyFile.close()
+    pygame.display.update()
+    pygame.time.delay(10)       
 
 #sq_color=colors.get('navy')
 #Making a rand c f the square
