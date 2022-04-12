@@ -40,10 +40,10 @@ def redrawGameWindow():
     if left:  
         win.blit(walkLeft[walkCount//3], (x,y))
         walkCount += 1 
-        if ((x >140 and x < 170) and (y >250 and y <280)):  
-            # win.blit(char,(x,y-5)) 
-            # win.blit(char,(x,y-5)) 
-            # win.blit(char,(x,y-5))
+        if ((x >140 and x < 290) and (y >250 and y <370)):  
+            win.blit(char,(x,y-5)) 
+            win.blit(char,(x,y-5)) 
+            win.blit(char,(x,y-5))
             print(x+"and"+y)
             
  
