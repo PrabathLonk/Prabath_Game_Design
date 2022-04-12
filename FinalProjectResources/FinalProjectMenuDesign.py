@@ -66,6 +66,21 @@ INST_FNT=pygame.font.SysFont('proximanova', 30)
 
 squareM=pygame.Rect(xMs,yMs,wb,hb)
 #Create Title
+def bak():
+    global MAIN
+    global INST
+    global SETT
+    global LEV_I
+    global LEV_II
+    global LEV_III
+    global SCORE
+    MAIN=True
+    INST=False
+    SETT=False
+    LEV_I=False
+    LEV_II=False
+    LEV_III=False
+    SCORE=False
 def ScoreB():
     global N
     global temp
@@ -393,10 +408,8 @@ while check:
         screen.blit(BackButton,(200,500))
         pygame.display.update()
         if ((mouse_pos[0] >200 and mouse_pos[0] <540) and (mouse_pos[1] >500 and mouse_pos[1] <540)):
-                screen.fill(background)
-                SCORE=False
-                MAIN=True
-                TitleMenu("MENU")
+                bak()
+                TitleMenu("Main Menu")
                 MainMenu(MenuList)
         #call funct t print scres
         screCk=False

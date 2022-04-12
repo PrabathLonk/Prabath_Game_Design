@@ -17,6 +17,7 @@ y = 400
 width = 40
 height = 60
 vel = 5
+MAX=-10
 
 clock = pygame.time.Clock()
 
@@ -81,7 +82,7 @@ while run:
             right = False
             walkCount = 0
     else:
-        if jumpCount >= -10:
+        if jumpCount >= MAX:
             y -= (jumpCount * abs(jumpCount)) * 0.5
             jumpCount -= 1
         else: 
