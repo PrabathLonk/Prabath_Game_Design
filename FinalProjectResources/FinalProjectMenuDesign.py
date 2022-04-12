@@ -1,4 +1,4 @@
-#MAria I SUarez
+#Prabath Girish
 #learning how to draw circles and rectangles
 #use keys to move objects
 #Using Dictionaries
