@@ -1,7 +1,8 @@
 #Prabath Girish
 #4/9/22
 # Tutorial to create moving images
-import pygame, os
+#Finish Thwomp Machanic
+import pygame, os, random
 pygame.init()
 os.system('cls')
 win = pygame.display.set_mode((500,480))
@@ -11,6 +12,10 @@ walkRight = [pygame.image.load('FinalProjectResources\Images\R1.png'), pygame.im
 walkLeft = [pygame.image.load('FinalProjectResources\Images\L1.png'), pygame.image.load('FinalProjectResources\Images\L2.png'), pygame.image.load('FinalProjectResources\Images\L3.png'), pygame.image.load('FinalProjectResources\Images\L4.png'), pygame.image.load('FinalProjectResources\Images\L5.png'), pygame.image.load('FinalProjectResources\Images\L6.png'), pygame.image.load('FinalProjectResources\Images\L7.png'), pygame.image.load('FinalProjectResources\Images\L8.png'), pygame.image.load('FinalProjectResources\Images\L9.png')]
 bg = pygame.image.load('FinalProjectResources\Images\gb_ImageTutorial.jpg')
 bg2=pygame.image.load('FinalProjectResources\Images\Sunset.jpg')
+bg3=pygame.image.load('FinalProjectResources\Images\Handshake.jpg')
+bg4=pygame.image.load('FinalProjectResources\Images\GrassyBackground.jpg')
+bg5=pygame.image.load('FinalProjectResources\Images\Grassland.jpg')
+bgList=[bg,bg2,bg3,bg4,bg5]
 char = pygame.image.load('FinalProjectResources\Images\standing.png')
 thwomp= pygame.image.load('FinalProjectResources\Images\Thwomp.png')
 x = 50
@@ -85,7 +90,7 @@ while run:
         walkCount = 0
 
     if x== 480-80:
-        bg=bg2
+        bg=random.choice(list(bgList))
         y=400
         x=0
         win.blit(char,(x,y))
