@@ -15,7 +15,8 @@ bg2=pygame.image.load('FinalProjectResources\Images\Sunset.jpg')
 bg3=pygame.image.load('FinalProjectResources\Images\Handshake.jpg')
 bg4=pygame.image.load('FinalProjectResources\Images\GrassyBackground.jpg')
 bg5=pygame.image.load('FinalProjectResources\Images\Grassland.jpg')
-rip=pygame.image.load('FinalProjectResources\Images\Rip2.png')
+rip=pygame.image.load('FinalProjectResources\Images\dead.png')
+RealRIP=pygame.transform.scale(rip,(64,64))
 bgList=[bg,bg2,bg3,bg4,bg5]
 char = pygame.image.load('FinalProjectResources\Images\standing.png')
 thwomp= pygame.image.load('FinalProjectResources\Images\Thwomp.png')
@@ -92,10 +93,10 @@ while run:
         right = False
         checkCollide= pygame.Rect.colliderect(ThwompBox,hitbox)
         if checkCollide:
+            char=RealRIP
             y=400
             hitbox.y=y
             GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
-            char=rip
             win.blit(GameOver,(0,0))
             # run=False
 
@@ -110,10 +111,10 @@ while run:
         right = True
         checkCollide= pygame.Rect.colliderect(ThwompBox,hitbox)
         if checkCollide:
+            char=RealRIP
             y=400
             hitbox.y=y
             GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
-            char=rip
             win.blit(GameOver,(0,0))
             # run=False
 
@@ -127,12 +128,12 @@ while run:
         walkCount = 0
         checkCollide= pygame.Rect.colliderect(ThwompBox,hitbox)
         if checkCollide:
+            char=RealRIP
             y=400
             hitbox.y=y
-            char=rip
-            print("YOU DIED! GAME OVER.")
+            GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
+            win.blit(GameOver,(0,0))
             # run=False
-
 
 
     if x== 400:
@@ -161,12 +162,12 @@ while run:
             hitbox.y=y
             jumpCount -= 1
             if checkCollide:
-                jumpCount=0
                 y=400
                 hitbox.y=y
-                win.blit(rip,(x,y))
-                # print("Oof you died. Try again later")
-                # run=False
+                # GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
+                char=RealRIP
+                win.blit(GameOver,(0,0))
+            # run=False
 
         else: 
             jumpCount = 10
