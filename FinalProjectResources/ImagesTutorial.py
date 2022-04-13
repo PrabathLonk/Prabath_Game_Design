@@ -19,6 +19,7 @@ rip=pygame.image.load('FinalProjectResources\Images\Rip2.png')
 bgList=[bg,bg2,bg3,bg4,bg5]
 char = pygame.image.load('FinalProjectResources\Images\standing.png')
 thwomp= pygame.image.load('FinalProjectResources\Images\Thwomp.png')
+INSTRUCTION_FONT=pygame.font.SysFont('proxmanova',35)
 x = 50
 y = 400
 hitX=50
@@ -91,12 +92,12 @@ while run:
         right = False
         checkCollide= pygame.Rect.colliderect(ThwompBox,hitbox)
         if checkCollide:
-            isJump=False
             y=400
             hitbox.y=y
-            win.blit(rip,(x,y))
-            print("Oof you died. Try again later")
-            run=False
+            GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
+            char=rip
+            win.blit(GameOver,(0,0))
+            # run=False
 
 
 
@@ -109,12 +110,13 @@ while run:
         right = True
         checkCollide= pygame.Rect.colliderect(ThwompBox,hitbox)
         if checkCollide:
-            isJump=False
             y=400
             hitbox.y=y
-            win.blit(rip,(x,y))
-            print("Oof you died. Try again later")
-            run=False
+            GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
+            char=rip
+            win.blit(GameOver,(0,0))
+            # run=False
+
 
 
         pygame.display.update()
@@ -125,12 +127,12 @@ while run:
         walkCount = 0
         checkCollide= pygame.Rect.colliderect(ThwompBox,hitbox)
         if checkCollide:
-            isJump=False
             y=400
             hitbox.y=y
-            win.blit(rip,(x,y))
-            print("Oof you died. Try again later")
-            run=False
+            char=rip
+            print("YOU DIED! GAME OVER.")
+            # run=False
+
 
 
     if x== 400:
@@ -159,13 +161,12 @@ while run:
             hitbox.y=y
             jumpCount -= 1
             if checkCollide:
-                isJump=False
+                jumpCount=0
                 y=400
                 hitbox.y=y
-                
                 win.blit(rip,(x,y))
-                print("Oof you died. Try again later")
-                run=False
+                # print("Oof you died. Try again later")
+                # run=False
 
         else: 
             jumpCount = 10
