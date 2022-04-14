@@ -43,15 +43,14 @@ walkCount = 0
 
 def redrawGameWindow():
     global walkCount
-    
+    pygame.draw.rect(win,(255,255,255),hitbox)
+    pygame.draw.rect(win,(255,255,255),ThwompBox)
     win.blit(bg, (0,0)) 
-    pygame.draw.rect(win,(255,255,255),ThwompBox) 
     win.blit(thwomp,(250,140))
     if walkCount + 1 >= 27:
         walkCount = 0
         
-    if left: 
-        pygame.draw.rect(win,(255,255,255),hitbox) 
+    if left:  
         win.blit(walkLeft[walkCount//3], (x,y))
         walkCount += 1 
         # if ((x >140 and x < 290) and (y >250 and y <370)):  
@@ -63,11 +62,9 @@ def redrawGameWindow():
             
  
     elif right:
-        pygame.draw.rect(win,(255,255,255),hitbox)
         win.blit(walkRight[walkCount//3], (x,y))
         walkCount += 1
     else:
-        pygame.draw.rect(win,(255,255,255),hitbox)
         win.blit(char, (x, y))
         walkCount = 0
         
