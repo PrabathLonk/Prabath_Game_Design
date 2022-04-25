@@ -182,9 +182,12 @@ while run:
                 # Platform.y-=jumpCount*abs(jumpCount)/2
                 # y-=jumpCount*abs(jumpCount)/2
                 # hitbox.y-=jumpCount*abs(jumpCount)/2
-                while PlatformCheck and y>Platform.y:
-                    y=Platform.y-64
-                    PlatformCheck=False
+                placeholder=y
+                y=Platform.y-64
+                    
+                    
+                        
+                
                 
                 
             # if checkCollide:
