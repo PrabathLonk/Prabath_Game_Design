@@ -38,13 +38,17 @@ vel = 5
 MAX=-10
 Stopper=False
 clock = pygame.time.Clock()
-PlatformCheck=hitbox.colliderect(Platform)
+PlatformCheck=False
 isJump = False
 jumpCount = 10
 
 left = False
 right = False
 walkCount = 0
+def gravity():
+    global y
+    while y!=400:
+        y-=10 
 def redrawGameWindow():
     global walkCount
     pygame.draw.rect(win,(255,255,255),hitbox)
@@ -68,7 +72,7 @@ def redrawGameWindow():
         #         y=y+10
         #     print(x+"and"+y)
         #     # left=False
-        if hitbox.colliderect(Platform):
+        while hitbox.colliderect(Platform) and y>Platform.y:
             PlatformCheck=True
             
             
@@ -76,12 +80,12 @@ def redrawGameWindow():
     elif right:
         win.blit(walkRight[walkCount//3], (x,y))
         walkCount += 1
-        if hitbox.colliderect(Platform):
+        if hitbox.colliderect(Platform) and y>Platform.y:
             PlatformCheck=True
     else:
         win.blit(char, (x, y))
         walkCount = 0
-        if hitbox.colliderect(Platform):
+        while hitbox.colliderect(Platform) and y>Platform.y:
             PlatformCheck=True
             
     pygame.display.update() 
@@ -172,18 +176,18 @@ while run:
             walkCount = 0
             PlatformCheck=False
             
+            
     else:
         if jumpCount >= MAX:
             y -= (jumpCount * abs(jumpCount)) * 0.5
             hitbox.y=y
             jumpCount -= 1
-            if PlatformCheck:
-                print("check")
-                # Platform.y-=jumpCount*abs(jumpCount)/2
+            if PlatformCheck and y>Platform.y:
+                y=Platform.y-64
                 # y-=jumpCount*abs(jumpCount)/2
                 # hitbox.y-=jumpCount*abs(jumpCount)/2
-                placeholder=y
-                y=Platform.y-64
+            if PlatformCheck and y<Platform.y:
+                y=400
                     
                     
                         
@@ -200,7 +204,7 @@ while run:
 
         else: 
             jumpCount = 10
-            isJump = False    
+            isJump = False 
 
 
     redrawGameWindow() 
