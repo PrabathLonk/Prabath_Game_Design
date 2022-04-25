@@ -155,7 +155,7 @@ while run:
         #     # run=False
 
 
-    if x== 400:
+    if x== WIDTH:
         bg=random.choice(list(bgList))
         y=400
         x=0
@@ -180,14 +180,15 @@ while run:
     else:
         if jumpCount >= MAX:
             y -= (jumpCount * abs(jumpCount)) * 0.5
-            hitbox.y=y
+            hitbox.y=y 
             jumpCount -= 1
-            if PlatformCheck and y>Platform.y:
-                y=Platform.y-64
+            placeholder=y
+            while PlatformCheck and y>Platform.y:
+                y=Platform.y-115
                 # y-=jumpCount*abs(jumpCount)/2
                 # hitbox.y-=jumpCount*abs(jumpCount)/2
-            if PlatformCheck and y<Platform.y:
-                y=400
+                # y-=jumpCount*abs(jumpCount)/2
+                # hitbox.y-=jumpCount*abs(jumpCount)/2
                     
                     
                         
