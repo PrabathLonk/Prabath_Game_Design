@@ -51,6 +51,8 @@ def gravity():
         y-=10 
 def redrawGameWindow():
     global walkCount
+    global y
+    global x
     pygame.draw.rect(win,(255,255,255),hitbox)
     # pygame.draw.rect(win,(255,255,255),ThwompBox)
     win.blit(SkyBG, (0,0)) 
@@ -72,8 +74,13 @@ def redrawGameWindow():
         #         y=y+10
         #     print(x+"and"+y)
         #     # left=False
-        while hitbox.colliderect(Platform) and y>Platform.y:
+        print(x)
+        if hitbox.colliderect(Platform) and y>Platform.y:
             PlatformCheck=True
+        if PlatformCheck and x<WIDTH/2-150:
+            y=400
+        else:
+            PlatformCheck=False
             
             
 
@@ -82,11 +89,16 @@ def redrawGameWindow():
         walkCount += 1
         if hitbox.colliderect(Platform) and y>Platform.y:
             PlatformCheck=True
+        else:
+            PlatformCheck=False
     else:
         win.blit(char, (x, y))
         walkCount = 0
-        while hitbox.colliderect(Platform) and y>Platform.y:
+        if hitbox.colliderect(Platform) and y>Platform.y:
             PlatformCheck=True
+        else:
+            PlatformCheck=False
+
             
     pygame.display.update() 
     
@@ -105,12 +117,14 @@ while run:
         Stopper=True
     keys = pygame.key.get_pressed()
     
-    if keys[pygame.K_LEFT] and x > vel: 
-        x -= vel
-        hitbox.x=x
-        left = True
-        right = False
-        checkCollide= pygame.Rect.colliderect(ThwompBox,hitbox)
+    if keys[pygame.K_LEFT]: 
+        if x > vel and not PlatformCheck:
+            x -= vel
+            hitbox.x=x
+            left = True
+            right = False
+        
+        # checkCollide= pygame.Rect.colliderect(ThwompBox,hitbox)
         # if checkCollide:
         #     char=RealRIP
         #     y=400
@@ -182,13 +196,18 @@ while run:
             y -= (jumpCount * abs(jumpCount)) * 0.5
             hitbox.y=y 
             jumpCount -= 1
-            placeholder=y
-            while PlatformCheck and y>Platform.y:
+            # placeholder=y
+            if PlatformCheck and y>Platform.y:
                 y=Platform.y-115
                 # y-=jumpCount*abs(jumpCount)/2
                 # hitbox.y-=jumpCount*abs(jumpCount)/2
                 # y-=jumpCount*abs(jumpCount)/2
                 # hitbox.y-=jumpCount*abs(jumpCount)/2
+                if x<WIDTH/2-150 or x>WIDTH/2-150+(WIDTH/5):
+                    y=400
+
+
+            
                     
                     
                         
