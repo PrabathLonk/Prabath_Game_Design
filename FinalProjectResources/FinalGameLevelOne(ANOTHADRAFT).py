@@ -1,4 +1,4 @@
-#Prabath Girish
+# Prabath Girish
 #4/27/22
 # Tutorial to create moving images
 #Finish Thwomp Machanic
@@ -98,14 +98,15 @@ while run:
         checkCollide= pygame.Rect.colliderect(Platform,hitbox)
         if checkCollide and y>Platform.y:
         #     char=RealRIP
+            isJump=False
             y=Platform.y-64
             hitbox.y=y
         #     GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
         #     win.blit(GameOver,(0,0))
         #     # run=False
-            if checkCollide and x<WIDTH/2-150:
+        if not checkCollide and x<WIDTH/2-150:
                 y=bottomPlat.y-64
-            if checkCollide and x>WIDTH/2-150-(WIDTH/5):
+        if  not checkCollide and x>WIDTH/2-150-(WIDTH/5):
                 y=bottomPlat.y-64
         
         
@@ -122,14 +123,15 @@ while run:
         checkCollide= pygame.Rect.colliderect(Platform,hitbox)
         if checkCollide and y>Platform.y:
         #     char=RealRIP
+            isJump=False
             y=Platform.y-64
             hitbox.y=y
         #     GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
         #     win.blit(GameOver,(0,0))
         #     # run=False
-            if checkCollide and x<WIDTH/2-150:
+            if not checkCollide and x<WIDTH/2-150:
                 y=bottomPlat.y-64
-            if checkCollide and x>WIDTH/2-150-(WIDTH/5):
+            if not checkCollide and x>WIDTH/2-150-(WIDTH/5):
                 y=bottomPlat.y-64
 
 
@@ -143,15 +145,16 @@ while run:
         checkCollide= pygame.Rect.colliderect(Platform,hitbox)
         if checkCollide and y>Platform.y:
         #     char=RealRIP
+            isJump=False
             y=Platform.y-64
             hitbox.y=y
         #     GameOver=INSTRUCTION_FONT.render("YOU DIED. GAME OVER",1,(0,0,255))
         #     win.blit(GameOver,(0,0))
         #     # run=False
-            # if checkCollide and x<WIDTH/2-150:
-            #     y=bottomPlat.y-64
-            # if checkCollide and x>WIDTH/2-150-(WIDTH/5):
-            #     y=bottomPlat.y-64
+            if not checkCollide and x<WIDTH/2-150:
+                y=bottomPlat.y-64
+            if not checkCollide and x>WIDTH/2-150-(WIDTH/5):
+                y=bottomPlat.y-64
 
 
     if x== WIDTH:
