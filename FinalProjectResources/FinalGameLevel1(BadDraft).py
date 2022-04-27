@@ -74,12 +74,12 @@ def redrawGameWindow():
         #         y=y+10
         #     print(x+"and"+y)
         #     # left=False
-        print(x)
-        if hitbox.colliderect(Platform) and y>Platform.y:
+        print(PlatformCheck,y,x,hitbox.x,hitbox.y)
+        if y>Platform.y and x>WIDTH/2-150 and x<WIDTH/2-150+(WIDTH/5):
             PlatformCheck=True
+            print(x)
         if PlatformCheck and x<WIDTH/2-150:
             y=400
-        else:
             PlatformCheck=False
             
             
@@ -87,7 +87,8 @@ def redrawGameWindow():
     elif right:
         win.blit(walkRight[walkCount//3], (x,y))
         walkCount += 1
-        if hitbox.colliderect(Platform) and y>Platform.y:
+        print(PlatformCheck,y)
+        if y>Platform.y and x<WIDTH/2-150+(WIDTH/5):
             PlatformCheck=True
         else:
             PlatformCheck=False
@@ -199,6 +200,7 @@ while run:
             # placeholder=y
             if PlatformCheck and y>Platform.y:
                 y=Platform.y-115
+                hitbox.y=y
                 # y-=jumpCount*abs(jumpCount)/2
                 # hitbox.y-=jumpCount*abs(jumpCount)/2
                 # y-=jumpCount*abs(jumpCount)/2
