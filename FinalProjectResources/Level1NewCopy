@@ -66,7 +66,6 @@ class projectile(object):
         self.facing = facing
         self.vel = 8 * facing
         
-        
 
     def draw(self,win):
         pygame.draw.circle(win, self.color, (self.x,self.y), self.radius)
@@ -165,7 +164,7 @@ while run:
     if RayHitbox.colliderect(manRect):
         Health-=1
         print(Health) 
-        man.x-=50
+        man.x-=10
         if Health<=0:
             print("YOU DIED")
             quit()  
