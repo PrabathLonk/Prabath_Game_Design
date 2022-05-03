@@ -95,11 +95,11 @@ class enemy(object):
         print('hit')
         RayquazaHealth.width-=5
 def redrawGameWindow():
+    manRect=pygame.Rect(man.x+10, man.y+10, 46, 54)
+    pygame.draw.rect(win, (255,255,255),manRect)
     pygame.draw.rect(win, (255,255,255),RayHitbox)
     win.blit(SkyBG, (0,0))
     Rayquaza.draw(win)
-    manRect=pygame.Rect(man.x+10, man.y+10, 46, 54)
-    pygame.draw.rect(win, (255,255,255),manRect)
     man.draw(win)
     pygame.draw.rect(win, (255,255,255),BottomPlat)
     pygame.draw.rect(win,green,RayquazaHealth)
