@@ -81,6 +81,7 @@ class enemy(object):
         self.height = height
         self.end=end
         self.hitbox = (self.x, self.y,WIDTH/4,HEIGHT-175)
+        print((self.hitbox[0]))
         # self.path = [x, end]
         # self.walkCount = 0
         # self.vel = 3
@@ -138,11 +139,13 @@ while run:
             bullets.append(projectile(round(man.x + man.width //2), round(man.y + man.height//2), 6, (0,0,0), facing))
 
         for bullet in bullets:
-            if bullet.y - bullet.radius < Rayquaza.hitbox[1] + Rayquaza.hitbox[3]  and bullet.y + bullet.radius > Rayquaza[1]:
-                if bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]:
-                    Rayquaza.hit()
-                    RayquazaHealth.width-=10
-                    bullets.pop(bullets.index(bullet))
+            if (bullet.y - bullet.radius < Rayquaza.hitbox[1] + Rayquaza.hitbox[3]  and (bullet.y + bullet.radius > Rayquaza.hitbox[1]) and bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]):
+                print("hi")
+            # if bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]:
+                print("hello")
+                Rayquaza.hit()
+                RayquazaHealth.width-=10
+                bullets.pop(bullets.index(bullet))
 
 
     if keys[pygame.K_LEFT] and man.x > man.vel:
