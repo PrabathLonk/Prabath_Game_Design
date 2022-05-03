@@ -23,15 +23,15 @@ walkRight = [pygame.image.load('FinalProjectResources\Images\R1.png'), pygame.im
 
 walkLeft = [pygame.image.load('FinalProjectResources\Images\L1.png'), pygame.image.load('FinalProjectResources\Images\L2.png'), pygame.image.load('FinalProjectResources\Images\L3.png'), pygame.image.load('FinalProjectResources\Images\L4.png'), pygame.image.load('FinalProjectResources\Images\L5.png'), pygame.image.load('FinalProjectResources\Images\L6.png'), pygame.image.load('FinalProjectResources\Images\L7.png'), pygame.image.load('FinalProjectResources\Images\L8.png'), pygame.image.load('FinalProjectResources\Images\L9.png')]
 
-bg = pygame.image.load('FinalProjectResources\Images\gb_ImageTutorial.jpg')
-
+bg = pygame.image.load('FinalProjectResources\Images\SkyBackground_Rayquaza.jpg')
+SkyBG=pygame.transform.scale(bg,(WIDTH,HEIGHT))
 char = pygame.image.load('FinalProjectResources\Images\standing.png')
 
  
 
 x = 50
 
-y = 400
+y = HEIGHT-200
 
 width = 40
 
@@ -40,6 +40,7 @@ height = 60
 vel = 5
 
 platfrm=pygame.Rect(WIDTH/2-150, HEIGHT/2, WIDTH/5, 10)
+BottomPlat= pygame.Rect(0,HEIGHT-132,WIDTH,10)
 
 clock = pygame.time.Clock()
 
@@ -67,22 +68,22 @@ def redrawGameWindow(x,yt):
 
     y=yt
 
-    win.blit(bg, (0,0))
+    win.blit(SkyBG, (0,0))
 
     manRect=pygame.Rect(x+10, y+10, 46, 54)
 
     pygame.draw.rect(win, (255,255,255), platfrm)
+    pygame.draw.rect(win, (255,255,255), BottomPlat)
 
     checkCollide = manRect.colliderect(platfrm)
 
     print(checkCollide)
 
     if checkCollide:
-
+        global flag
         flag=True
-
         y=platfrm.y-64
-
+   
     manRect=pygame.Rect(x+10, y+10, 46, 54)
 
     pygame.draw.rect(win, (255,255,255),manRect)
