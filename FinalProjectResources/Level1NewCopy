@@ -21,7 +21,7 @@ Health=10
 Ray1=pygame.image.load('FinalProjectResources\Images\RayquazaIdle.png')
 RayIdle=pygame.transform.scale(Ray1,(WIDTH/4,HEIGHT-175))
 RayHitbox=pygame.Rect(WIDTH-WIDTH/4,105,WIDTH/4,HEIGHT-175)
-
+hitCount=0
 class player(object):
     def __init__(self,x,y,width,height):
         self.x = x
@@ -93,10 +93,10 @@ class enemy(object):
         pygame.draw.rect(win, (255,0,0), self.hitbox,2)
     def hit(self):  # This will display when the enemy is hit
         print('hit')
-        RayquazaHealth.width-=10
+        RayquazaHealth.width-=5
 def redrawGameWindow():
-    win.blit(SkyBG, (0,0))
     pygame.draw.rect(win, (255,255,255),RayHitbox)
+    win.blit(SkyBG, (0,0))
     Rayquaza.draw(win)
     manRect=pygame.Rect(man.x+10, man.y+10, 46, 54)
     pygame.draw.rect(win, (255,255,255),manRect)
@@ -140,12 +140,15 @@ while run:
 
         for bullet in bullets:
             if (bullet.y - bullet.radius < Rayquaza.hitbox[1] + Rayquaza.hitbox[3]  and (bullet.y + bullet.radius > Rayquaza.hitbox[1]) and bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]):
-                print("hi")
-            # if bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]:
-                print("hello")
+                # print("hi")
+                # if bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]:
+                # print("hello")
                 Rayquaza.hit()
-                RayquazaHealth.width-=10
                 bullets.pop(bullets.index(bullet))
+                hitCount+=1
+                if hitCount==40: 
+                    print("LEVEL 1 COMPLETE")
+                    RayIdle=pygame.image.load('FinalProjectResources\Images\BLANK_ICON.png')
 
 
     if keys[pygame.K_LEFT] and man.x > man.vel:
