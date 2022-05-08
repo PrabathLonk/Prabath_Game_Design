@@ -19,14 +19,20 @@ pygame.display.set_caption("Level 1: Rayquaza")
 walkRight = [pygame.image.load('FinalProjectResources\Images\R1.png'), pygame.image.load('FinalProjectResources\Images\R2.png'), pygame.image.load('FinalProjectResources\Images\R3.png'), pygame.image.load('FinalProjectResources\Images\R4.png'), pygame.image.load('FinalProjectResources\Images\R5.png'), pygame.image.load('FinalProjectResources\Images\R6.png'), pygame.image.load('FinalProjectResources\Images\R7.png'), pygame.image.load('FinalProjectResources\Images\R8.png'), pygame.image.load('FinalProjectResources\Images\R9.png')]
 walkLeft = [pygame.image.load('FinalProjectResources\Images\L1.png'), pygame.image.load('FinalProjectResources\Images\L2.png'), pygame.image.load('FinalProjectResources\Images\L3.png'), pygame.image.load('FinalProjectResources\Images\L4.png'), pygame.image.load('FinalProjectResources\Images\L5.png'), pygame.image.load('FinalProjectResources\Images\L6.png'), pygame.image.load('FinalProjectResources\Images\L7.png'), pygame.image.load('FinalProjectResources\Images\L8.png'), pygame.image.load('FinalProjectResources\Images\L9.png')]
 bg = pygame.image.load('FinalProjectResources\Images\SkyBackground_Rayquaza.jpg')
+bg2= pygame.image.load('FinalProjectResources\Images\SpongebobBackground_SansFightBackground.jpg')
 SkyBG=pygame.transform.scale(bg,(WIDTH,HEIGHT))
+SansBG=pygame.transform.scale(bg2,(WIDTH,HEIGHT))
 char = pygame.image.load('FinalProjectResources\Images\standing.png')
 Ray1=pygame.image.load('FinalProjectResources\Images\RayquazaIdle.png')
 RayIdle=pygame.transform.scale(Ray1,(WIDTH/4,HEIGHT-175))
 RayHitbox=pygame.Rect(WIDTH-WIDTH/4,105,WIDTH/4,HEIGHT-175)
+Sans1=pygame.image.load('FinalProjectResources\Images\SansStartIdle.png')
+SansIdle=pygame.transform.scale(Sans1,(WIDTH/4,HEIGHT-175))
+SansHitbox=pygame.Rect(WIDTH-WIDTH/4,105,WIDTH/4,HEIGHT-175)
 manRect=pygame.Rect(210, 400, 64, 64)
 # Places the bottom platform to stand on:
 BottomPlat= pygame.Rect(0,HEIGHT-20,WIDTH,10)
+BottomPlat2=pygame.Rect(0,HEIGHT-20,WIDTH,10)
 # Creates a tick count for time functions
 clock = pygame.time.Clock()
 tickStart=pygame.time.get_ticks()
@@ -34,15 +40,23 @@ tickStart=pygame.time.get_ticks()
 green=(18,230,3)
 # Defines botht the player and enemy health
 RayquazaHealth=pygame.Rect(WIDTH/2-100,WIDTH-(WIDTH-50),200,8)
+SansHealth=pygame.Rect(WIDTH/2-100,WIDTH-(WIDTH-50),311,8)
 Health=10
 #Creates two Counts to check health of the boss and allows the boss to counter attack
 hitCount=0
 revengeCount=0
 # Just defines the player's name and the the bonus that the player gets for time
 TimeBonus=0
+# Spikes image
+Spike1=pygame.image.load('FinalProjectResources\Images\Spikes.png')
+Spike=pygame.transform.scale(Spike1,(48,28))
+# Gets the Player's name for score
 Name=input("Type your name:")
 # Checks if the Boss is alive
 AliveCheck=True
+AliveCheck2=False
+# Checks the level:
+LevelCheck=False
 # Here we make our Player class that defines the Player Character
 class player(object):
     global Health
@@ -145,10 +159,18 @@ def redrawGameWindow():
     manRect=pygame.Rect(man.x+10, man.y+10, 46, 54)
     pygame.draw.rect(win, (255,255,255),manRect)
     pygame.draw.rect(win, (255,255,255),RayHitbox)
+    # Draws the spikes only in he second level
+    if RayIdle==SansIdle and AliveCheck:
+        pygame.draw.rect(win,(255,255,255),SpikeHitbox)
+        pygame.draw.rect(win,(255,255,255),SpikeHitbox2)
     win.blit(SkyBG, (0,0))
     # This only draws the boss if his health is higher than 0
     if AliveCheck:
         Rayquaza.draw(win)
+    if RayIdle==SansIdle and AliveCheck:
+        spike.draw(win)
+        spike2.draw(win)
+    # Draws the boss healthbar, player, and bottom platform
     man.draw(win)
     pygame.draw.rect(win, (255,255,255),BottomPlat)
     pygame.draw.rect(win,green,RayquazaHealth)
@@ -161,17 +183,41 @@ def redrawGameWindow():
     
     pygame.display.update()
 
+# This defines the spikes on the ground in level 2:
+class spikes(object):
+    def __init__(self, x, y, width, height,end):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.end=end
+        self.hitbox = (self.x, self.y,self.width,self.height)
+        print((self.hitbox[0]))
+    def draw(self, win):
+        win.blit(Spike,(self.x,self.y))
+
+
+
+
 
 #mainloop
-# Define the player, boss, and their respective projectiles
+# Define the player, boss, and their respective projectiles, as well as the 2 sets of spikes for the 2nd level
 man = player(0, BottomPlat.y-64, 64,64)
 Rayquaza=enemy(WIDTH-WIDTH/4,100,WIDTH/4,HEIGHT-175,0)
+Sans=enemy(WIDTH-WIDTH/4,100,WIDTH/4,HEIGHT-175,0)
+spike=spikes(WIDTH/4,BottomPlat.y-28,25,28,0)
+spike2=spikes((3*WIDTH/4),BottomPlat.y-28,25,28,0)
+SpikeHitbox=pygame.Rect(spike.x,spike.y,spike.width,spike.height)
+SpikeHitbox2=pygame.Rect(spike2.x,spike2.y,spike2.width,spike2.height)
 bullets = []
 fireBalls=[]
+GastBlasts=[]
 # fireBall=projectile(Rayquaza.x,random.randint((man.x-50),(man.x+50)),5,(255,0,0),0)
 # Creates the loop that runs the game
 run = True
+run2=False
 while run:
+    # print(man.x)
     for fireBall in fireBalls:
         fireBall.x-=5
     clock.tick(27)
@@ -219,32 +265,60 @@ while run:
                 # print(revengeCount)
 
                 # Creates the ability for the boss to die once they take 40 hits
-                if hitCount==40:
-                    tickEnd=pygame.time.get_ticks()
-                    print("LEVEL 1 COMPLETE")
-                    ScoreTime=tickEnd-tickStart
-                    RayIdle=pygame.image.load('FinalProjectResources\Images\BLANK_ICON.png')
-                    AliveCheck=False
-                    # print(ScoreTime)
-                    # print(tickStart)
-                    # print(tickEnd)
+                if hitCount==40 and not LevelCheck:
+                        print('unga')
+                        tickEnd=pygame.time.get_ticks()
+                        print("LEVEL 1 COMPLETE")
+                        ScoreTime=tickEnd-tickStart
+                        RayIdle=pygame.image.load('FinalProjectResources\Images\BLANK_ICON.png')
+                        AliveCheck=False
+                        # print(ScoreTime)
+                        # print(tickStart)
+                        # print(tickEnd)
 
-                    # Creates a time bonus and a score for the player
-                    if ScoreTime<=6000:
-                        TimeBonus=1000
-                    elif ScoreTime>6000 and ScoreTime<18500:
-                        TimeBonus=500
-                    elif ScoreTime>=18500:
-                        TimeBonus=200
-                    Score=1000+ScoreTime+TimeBonus+(man.Health*100)
-                    ScoreLine=Name+ ":" + str(Score) + "(LEVEL 1)"
-                    print(ScoreLine)
+                        # Creates a time bonus and a score for the player
+                        if ScoreTime<=6000:
+                            TimeBonus=1000
+                        elif ScoreTime>6000 and ScoreTime<18500:
+                            TimeBonus=500
+                        elif ScoreTime>=18500:
+                            TimeBonus=200
+                        Score=1000+ScoreTime+TimeBonus+(man.Health*100)
+                        ScoreLine=Name+ ":" + str(Score) + "(LEVEL 1)"
+                        print(ScoreLine)
+                if hitCount==61 and LevelCheck: 
+                    if RayIdle==SansIdle:
+                        tickEnd=pygame.time.get_ticks()
+                        print("LEVEL 2 COMPLETE")
+                        ScoreTime=tickEnd-tickStart
+                        RayIdle=pygame.image.load('FinalProjectResources\Images\BLANK_ICON.png')
+                        AliveCheck=False
+                        # print(ScoreTime)
+                        # print(tickStart)
+                        # print(tickEnd)
+
+                        # Creates a time bonus and a score for the player
+                        if ScoreTime<=6000:
+                            TimeBonus=1000
+                        elif ScoreTime>6000 and ScoreTime<18500:
+                            TimeBonus=500
+                        elif ScoreTime>=18500:
+                            TimeBonus=200
+                        Score=1000+ScoreTime+TimeBonus+(man.Health*100)
+                        ScoreLine=Name+ ":" + str(Score) + "(LEVEL 2)"
+                        print(ScoreLine)
+                        print("THANKS FOR PLAYING")
+                        quit()
                 # This creates a revenge ability that allows the boss to shoot back
                 if revengeCount==3:
                     if AliveCheck:
                         # Appends the list to fit the max amount of hits taken by the boss
                         if len(fireBalls) < 66:
-                                    fireBalls.append(projectile(round(Rayquaza.x+Rayquaza.width//2), man.y, 20, (255,0,0), facing)) 
+                            # Changes the color based on the boss
+                            if not LevelCheck:
+                                fireBalls.append(projectile(round(Rayquaza.x+Rayquaza.width//2), man.y, 20, (255,0,0), facing)) 
+                            if LevelCheck:
+                                 fireBalls.append(projectile(round(Rayquaza.x+Rayquaza.width//2), man.y, 20, (0,0,255), facing)) 
                         # Determines the direction of the fireBall
                         for fireBall in fireBalls:
                             facing=-1
@@ -284,10 +358,25 @@ while run:
     if RayHitbox.colliderect(manRect) and AliveCheck:
         man.Health-=1
         print("HEALTH:",man.Health) 
-        man.x-=10
+        man.x=0
         if Health<=0:
             print("YOU DIED")
             quit()  
+    # Deals damage to the player if they touch the spikes when the second boss is visible
+    if SpikeHitbox.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
+        man.x=0
+        man.Health-=1
+        print("HEALTH:",man.Health) 
+        if Health<=0:
+            print("YOU DIED")
+            quit() 
+    if SpikeHitbox2.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
+        man.x=0
+        man.Health-=1
+        print("HEALTH:",man.Health) 
+        if Health<=0:
+            print("YOU DIED")
+            quit() 
     # Stuff for the jumping of the player
     if not(man.isJump):
         if keys[pygame.K_UP]:
@@ -306,6 +395,18 @@ while run:
         else:
             man.isJump = False
             man.jumpCount = 10
+
+    #Resets and changes the level, health, changes the background and boss, and creates the spikes on the ground
+    if man.x==735 and not AliveCheck:
+        man.x=0
+        Health=10
+        SkyBG=SansBG
+        RayIdle=SansIdle
+        AliveCheck=True
+        RayquazaHealth.width=305
+        hitCount=0
+        tickStart=pygame.time.get_ticks()
+        LevelCheck=True
     # Updates animations and movement        
     redrawGameWindow()
 
