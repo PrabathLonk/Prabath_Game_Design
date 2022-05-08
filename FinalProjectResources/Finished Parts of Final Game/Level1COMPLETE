@@ -264,7 +264,7 @@ while run:
                 revengeCount+=1
                 # print(revengeCount)
 
-                # Creates the ability for the boss to die once they take 40 hits
+                # Creates the ability for the boss to die once they take 40 hits (first level)
                 if hitCount==40 and not LevelCheck:
                         print('unga')
                         tickEnd=pygame.time.get_ticks()
@@ -283,9 +283,15 @@ while run:
                             TimeBonus=500
                         elif ScoreTime>=18500:
                             TimeBonus=200
+                        # Writes the score as a string with the name
                         Score=1000+ScoreTime+TimeBonus+(man.Health*100)
                         ScoreLine=Name+ ":" + str(Score) + "(LEVEL 1)"
                         print(ScoreLine)
+                        # Writes the score string in the file
+                        MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
+                        MyFile.write(ScoreLine)
+                        MyFile.close()
+                # Makes the level 2 boss die after 61 hits
                 if hitCount==61 and LevelCheck: 
                     if RayIdle==SansIdle:
                         tickEnd=pygame.time.get_ticks()
@@ -304,9 +310,14 @@ while run:
                             TimeBonus=500
                         elif ScoreTime>=18500:
                             TimeBonus=200
+                        # Writes the score as a string with the name
                         Score=1000+ScoreTime+TimeBonus+(man.Health*100)
-                        ScoreLine=Name+ ":" + str(Score) + "(LEVEL 2)"
+                        ScoreLine="\n" + Name+ ":" + str(Score) + "(LEVEL 2)"
                         print(ScoreLine)
+                        # Writes the score string in the file
+                        MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
+                        MyFile.write(ScoreLine)
+                        MyFile.close()
                         print("THANKS FOR PLAYING")
                         quit()
                 # This creates a revenge ability that allows the boss to shoot back
