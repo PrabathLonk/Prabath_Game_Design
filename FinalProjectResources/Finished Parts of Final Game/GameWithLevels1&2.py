@@ -7,8 +7,8 @@ pygame.init()
 os.system('cls')
 
 #Create our screen and it's width and height from Tech With Tim's Pygame Tutorial : https://www.techwithtim.net/tutorials/game-development-with-python/pygame-tutorial/projectiles/
-WIDTH=800
-HEIGHT=800
+WIDTH=700
+HEIGHT=600
 win = pygame.display.set_mode((WIDTH,HEIGHT))
 
 #Title Our sceen
@@ -407,8 +407,8 @@ while run:
             man.isJump = False
             man.jumpCount = 10
 
-    #Resets and changes the level, health, changes the background and boss, and creates the spikes on the ground
-    if man.x==735 and not AliveCheck:
+    #Resets and changes the level, health, changes the background and boss, and creates the spikes on the ground (when you touch the end of the screen)
+    if man.x+manRect.width==WIDTH and not AliveCheck:
         man.x=0
         Health=10
         SkyBG=SansBG
