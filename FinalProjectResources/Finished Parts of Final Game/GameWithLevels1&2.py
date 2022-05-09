@@ -190,11 +190,11 @@ class spikes(object):
         self.width = width
         self.height = height
         self.end=end
-        self.hitbox = (self.x, self.y,self.width*1.5,self.height)
+        self.hitbox = (self.x, self.y,self.width*1.25,self.height-10)
         print((self.hitbox[0]))
     def draw(self, win):
         win.blit(Spike,(self.x,self.y))
-        self.hitbox = (self.x, self.y, self.width*1.5, self.height) 
+        self.hitbox = (self.x, self.y, self.width*1.25, self.height-10) 
         pygame.draw.rect(win, (255,0,0), self.hitbox,2)
 
 
