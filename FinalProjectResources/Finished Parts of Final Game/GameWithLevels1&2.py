@@ -54,7 +54,6 @@ Spike=pygame.transform.scale(Spike1,(48,28))
 Name=input("Type your name:")
 # Checks if the Boss is alive
 AliveCheck=True
-AliveCheck2=False
 # Checks the level:
 LevelCheck=False
 # Here we make our Player class that defines the Player Character
