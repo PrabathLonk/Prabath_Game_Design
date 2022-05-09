@@ -408,7 +408,7 @@ while run:
             man.jumpCount = 10
 
     #Resets and changes the level, health, changes the background and boss, and creates the spikes on the ground (when you touch the end of the screen)
-    if man.x==WIDTH-manRect.width and not LevelCheck:
+    if man.x==WIDTH-65 and not AliveCheck:
         man.x=0
         Health=10
         SkyBG=SansBG
