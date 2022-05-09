@@ -313,12 +313,12 @@ while run:
                             TimeBonus=200
                         # Writes the score as a string with the name
                         Score=1000+ScoreTime+TimeBonus+(man.Health*100)
-                        ScoreLine= + Name+ ":" + str(Score) + "(LEVEL 2)"
-                        print(ScoreLine)
+                        ScoreLine2=Name+ ":" + str(Score) + "(LEVEL 2)"
+                        print(ScoreLine2)
                         # Writes the score string in the file
                         MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
                         MyFile.write("\n")
-                        MyFile.write(ScoreLine)
+                        MyFile.write(ScoreLine2)
                         MyFile.close()
                         print("THANKS FOR PLAYING")
                         quit()
@@ -380,14 +380,14 @@ while run:
         man.x=0
         man.Health-=1
         print("HEALTH:",man.Health) 
-        if Health<=0:
+        if man.yHealth<=0:
             print("YOU DIED")
             quit() 
     if SpikeHitbox2.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
         man.x=0
         man.Health-=1
         print("HEALTH:",man.Health) 
-        if Health<=0:
+        if man.Health<=0:
             print("YOU DIED")
             quit() 
     # Stuff for the jumping of the player
