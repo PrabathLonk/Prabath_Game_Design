@@ -7,7 +7,7 @@ pygame.init()
 os.system('cls')
 
 #Create our screen and it's width and height from Tech With Tim's Pygame Tutorial : https://www.techwithtim.net/tutorials/game-development-with-python/pygame-tutorial/projectiles/
-WIDTH=700
+WIDTH=600
 HEIGHT=600
 win = pygame.display.set_mode((WIDTH,HEIGHT))
 
@@ -289,6 +289,7 @@ while run:
                         print(ScoreLine)
                         # Writes the score string in the file
                         MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
+                        MyFile.write("\n")
                         MyFile.write(ScoreLine)
                         MyFile.close()
                 # Makes the level 2 boss die after 61 hits
@@ -312,10 +313,11 @@ while run:
                             TimeBonus=200
                         # Writes the score as a string with the name
                         Score=1000+ScoreTime+TimeBonus+(man.Health*100)
-                        ScoreLine="\n" + Name+ ":" + str(Score) + "(LEVEL 2)"
+                        ScoreLine= + Name+ ":" + str(Score) + "(LEVEL 2)"
                         print(ScoreLine)
                         # Writes the score string in the file
                         MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
+                        MyFile.write("\n")
                         MyFile.write(ScoreLine)
                         MyFile.close()
                         print("THANKS FOR PLAYING")
