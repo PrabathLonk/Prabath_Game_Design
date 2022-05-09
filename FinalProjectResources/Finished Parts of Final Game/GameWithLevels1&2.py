@@ -190,10 +190,12 @@ class spikes(object):
         self.width = width
         self.height = height
         self.end=end
-        self.hitbox = (self.x, self.y,self.width,self.height)
+        self.hitbox = (self.x, self.y,self.width*1.5,self.height)
         print((self.hitbox[0]))
     def draw(self, win):
         win.blit(Spike,(self.x,self.y))
+        self.hitbox = (self.x, self.y, self.width*1.5, self.height) 
+        pygame.draw.rect(win, (255,0,0), self.hitbox,2)
 
 
 
@@ -286,6 +288,8 @@ while run:
                         Score=1000+ScoreTime+TimeBonus+(man.Health*100)
                         ScoreLine=Name+ ":" + str(Score) + "(LEVEL 1)"
                         print(ScoreLine)
+                        print("Keep walking to go to next level")
+                        print("PRO GAMER START: Watch out for the continual shot of the fireball when you switch levels!")
                         # Writes the score string in the file
                         MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
                         MyFile.write("\n")
