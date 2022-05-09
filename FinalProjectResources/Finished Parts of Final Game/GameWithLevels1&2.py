@@ -41,7 +41,7 @@ green=(18,230,3)
 # Defines botht the player and enemy health
 RayquazaHealth=pygame.Rect(WIDTH/2-100,WIDTH-(WIDTH-50),200,8)
 SansHealth=pygame.Rect(WIDTH/2-100,WIDTH-(WIDTH-50),311,8)
-Health=10
+Health=5
 #Creates two Counts to check health of the boss and allows the boss to counter attack
 hitCount=0
 revengeCount=0
@@ -74,7 +74,7 @@ class player(object):
         self.jumpCount = 10
         self.standing = True
         # Defines the health for the hit function (replaces Health variable)
-        self.Health=10
+        self.Health=5
         #Creates the hitbox
         self.hitbox = (self.x+10, self.y+5, 25, 25)
 

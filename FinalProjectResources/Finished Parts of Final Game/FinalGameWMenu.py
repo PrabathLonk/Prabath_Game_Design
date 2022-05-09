@@ -113,7 +113,7 @@ class player(object):
         self.jumpCount = 10
         self.standing = True
         # Defines the health for the hit function (replaces Health variable)
-        self.Health=10
+        self.Health=5
         #Creates the hitbox
         self.hitbox = (self.x+10, self.y+5, 25, 25)
 
@@ -341,7 +341,7 @@ def instr():
     instructions4=INST_FNT.render("and use the up arrow to jump. Use the space bar to shoot",1,(0,0,255))
     instructions4=INST_FNT.render("magical bullets that damage the opponent. Find their weak spot and",1,(0,0,255))
     instructions5=INST_FNT.render("strike! Keep an eye out for the fireballs and spikes!",1,(0,0,255))
-    instructions6=INST_FNT.render("You will have 10 Health. Good luck warrior.",1,(0,0,255))
+    instructions6=INST_FNT.render("You will have 5 Health. Good luck warrior.",1,(0,0,255))
     BackButton=MENU_FONT.render("BACK",1,(0,0,0))
     screen.blit(instructions,(20,200))
     screen.blit(instructions2,(20,230))
@@ -437,204 +437,345 @@ def changeScreenSize(xZ,yZ):
         
 
 def playGame():
-    run = True
-    # run2=False
-    while run:
-        # print(man.x)
-        for fireBall in fireBalls:
-            fireBall.x-=5
-        clock.tick(27)
-        # Allows us to quit the game with the "X"
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
+    global AliveCheck
+    global RayIdle
+    global SansIdle
+    global player
+    global spikes
+    global enemy
+    global projectile
+    class player(object):
+        def __init__(self,x,y,width,height):
+            # Defines the dimensions of the character
+            self.x = x
+            self.y = y
+            self.width = width
+            self.height = height
+            # Defines the movement and jump checks
+            self.vel = 5
+            self.isJump = False
+            self.left = False
+            self.right = False
+            self.walkCount = 0
+            self.jumpCount = 10
+            self.standing = True
+            # Defines the health for the hit function (replaces Health variable)
+            self.Health=5
+            #Creates the hitbox
+            self.hitbox = (self.x+10, self.y+5, 25, 25)
 
-        # Creates the velocity and movement of the bullets    
+        def draw(self, screen):
+            #This function draws the character
+            if self.walkCount + 1 >= 27:
+                self.walkCount = 0
+            #This draws the hitbox of the character
+            self.hitbox = (self.x+10, self.y+10, 44, 50)
+            # pygame.draw.rect(screen, (255,0,0), self.hitbox,2)
+            # This animates the character
+            if not(self.standing):
+                if self.left:
+                    screen.blit(walkLeft[self.walkCount//3], (self.x,self.y))
+                    self.walkCount += 1
+                elif self.right:
+                    screen.blit(walkRight[self.walkCount//3], (self.x,self.y))
+                    self.walkCount +=1
+            else:
+                if self.right:
+                    screen.blit(walkRight[0], (self.x, self.y))
+                else:
+                    screen.blit(walkLeft[0], (self.x, self.y))
+        def hit(self):
+            print("oof")
+            self.Health-=1
+            print("HEALTH:",self.Health)
+            if self.Health<=0:
+                print("You Died")
+                quit()
+                    
+
+    # This class defines the projectile class and its attributes
+    class projectile(object):
+        def __init__(self,x,y,radius,color,facing):
+            # Defines position
+            self.x = x
+            self.y = y
+            #Defines radius
+            self.radius = radius
+            # Define color
+            self.color = color
+            # Defines the direction of the bullet
+            self.facing = facing
+            self.vel = 8 * facing
+            # Defines the projectile hitbox
+            self.hitbox=(self.x-self.radius,self.y-self.radius,2*self.radius,2*self.radius)
+
+        def draw(self,screen):
+            # Draws the bullet
+            pygame.draw.circle(screen, self.color, (self.x,self.y), self.radius)
+            self.hitbox=(self.x-self.radius,self.y-self.radius,2*self.radius,2*self.radius)
+            # pygame.draw.rect(screen, (255,0,0), self.hitbox,2)
+    # This creates the class for the boss
+    class enemy(object):
+        # walkRight = [pygame.image.load('R1E.png'), pygame.image.load('R2E.png'), pygame.image.load('R3E.png'), pygame.image.load('R4E.png'), pygame.image.load('R5E.png'), pygame.image.load('R6E.png'), pygame.image.load('R7E.png'), pygame.image.load('R8E.png'), pygame.image.load('R9E.png'), pygame.image.load('R10E.png'), pygame.image.load('R11E.png')]
+        # walkLeft = [pygame.image.load('L1E.png'), pygame.image.load('L2E.png'), pygame.image.load('L3E.png'), pygame.image.load('L4E.png'), pygame.image.load('L5E.png'), pygame.image.load('L6E.png'), pygame.image.load('L7E.png'), pygame.image.load('L8E.png'), pygame.image.load('L9E.png'), pygame.image.load('L10E.png'), pygame.image.load('L11E.png')]
+        #This defines the character's dimension and hitbox, like the character
+        def __init__(self, x, y, width, height,end):
+            self.x = x
+            self.y = y
+            self.width = width
+            self.height = height
+            self.end=end
+            self.hitbox = (self.x, self.y,WIDTH/4,HEIGHT-175)
+            print((self.hitbox[0]))
+            # self.path = [x, end]
+            # self.walkCount = 0
+            # self.vel = 3
+        #This function draws the enemy
+        def draw(self, screen):
+            # self.move()
+            screen.blit(RayIdle,(RayHitbox.x,RayHitbox.y))
+            self.hitbox = (self.x, self.y, WIDTH/4, HEIGHT-175) 
+            # pygame.draw.rect(screen, (255,0,0), self.hitbox,2)
+        def hit(self):  # This will display when the enemy is hit and indicate they have taken damage via the health
+            RayquazaHealth.width-=5
+    class spikes(object):
+        def __init__(self, x, y, width, height,end):
+            self.x = x
+            self.y = y
+            self.width = width
+            self.height = height
+            self.end=end
+            self.hitbox = (self.x, self.y,self.width,self.height)
+            print((self.hitbox[0]))
+        def draw(self, screen):
+            screen.blit(Spike,(self.x,self.y))
+    # This function draws everything we need on the screendow and updates it as the game runs
+    def redrawGameWindow():
+        global AliveCheck
+        manRect=pygame.Rect(man.x+10, man.y+10, 46, 54)
+        pygame.draw.rect(screen, (255,255,255),manRect)
+        pygame.draw.rect(screen, (255,255,255),RayHitbox)
+        # Draws the spikes only in he second level
+        if RayIdle==SansIdle and AliveCheck:
+            pygame.draw.rect(screen,(255,255,255),SpikeHitbox)
+            pygame.draw.rect(screen,(255,255,255),SpikeHitbox2)
+        screen.blit(SkyBG, (0,0))
+        # This only draws the boss if his health is higher than 0
+        if AliveCheck:
+            Rayquaza.draw(screen)
+        if RayIdle==SansIdle and AliveCheck:
+            spike.draw(screen)
+            spike2.draw(screen)
+        # Draws the boss healthbar, player, and bottom platform
+        man.draw(screen)
+        pygame.draw.rect(screen, (255,255,255),BottomPlat)
+        pygame.draw.rect(screen,green,RayquazaHealth)
+        # Draws the bullets when needed
         for bullet in bullets:
-            if bullet.x < WIDTH and bullet.x > 0:
-                bullet.x += bullet.vel
-            else:
-                bullets.pop(bullets.index(bullet))
-        # for fireBall in fireBalls:
-        #     if fireBall.x < WIDTH and fireBall.x > 0:
-        #         fireBall.x += fireBall.vel
-        #     else:
-        #         fireBall.pop(fireBalls.index(fireBall))
+            bullet.draw(screen)
+        for fireBall in fireBalls:
+            fireBall.draw(screen)
+            
+        pygame.display.update()
 
-        # Gets us a variable to check if the keys are being pressed
-        keys = pygame.key.get_pressed()
 
-        # This checks if we have pressed Space to call the bullets
-        if keys[pygame.K_SPACE]:
-            if man.left:
-                facing = -1
-            else:
-                facing = 1
-                
-            if len(bullets) < 5:
-                bullets.append(projectile(round(man.x + man.width //2), round(man.y + man.height//2), 6, (0,0,0), facing))
+    run = True
+        # run2=False
+    while run:
+            # print(man.x)
+            for fireBall in fireBalls:
+                fireBall.x-=5
+            clock.tick(27)
+            # Allows us to quit the game with the "X"
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+
+            # Creates the velocity and movement of the bullets    
             for bullet in bullets:
-                # Checks if the bullet hits the boss' hitbox
-                if (bullet.y - bullet.radius < Rayquaza.hitbox[1] + Rayquaza.hitbox[3]  and (bullet.y + bullet.radius > Rayquaza.hitbox[1]) and bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]):
-                    # print("hi")
-                    # if bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]:
-                    # print("hello")
-
-                    #Activates the hit function of the boss and adjusts the lists and counts for the boss and bullets
-                    Rayquaza.hit()
+                if bullet.x < WIDTH and bullet.x > 0:
+                    bullet.x += bullet.vel
+                else:
                     bullets.pop(bullets.index(bullet))
-                    hitCount+=1
-                    revengeCount+=1
-                    # print(revengeCount)
+            # for fireBall in fireBalls:
+            #     if fireBall.x < WIDTH and fireBall.x > 0:
+            #         fireBall.x += fireBall.vel
+            #     else:
+            #         fireBall.pop(fireBalls.index(fireBall))
 
-                    # Creates the ability for the boss to die once they take 40 hits (first level)
-                    if hitCount==40 and not LevelCheck:
-                            print('unga')
-                            tickEnd=pygame.time.get_ticks()
-                            print("LEVEL 1 COMPLETE")
-                            ScoreTime=tickEnd-tickStart
-                            RayIdle=pygame.image.load('FinalProjectResources\Images\BLANK_ICON.png')
-                            AliveCheck=False
-                            # print(ScoreTime)
-                            # print(tickStart)
-                            # print(tickEnd)
+            # Gets us a variable to check if the keys are being pressed
+            keys = pygame.key.get_pressed()
 
-                            # Creates a time bonus and a score for the player
-                            if ScoreTime<=6000:
-                                TimeBonus=1000
-                            elif ScoreTime>6000 and ScoreTime<18500:
-                                TimeBonus=500
-                            elif ScoreTime>=18500:
-                                TimeBonus=200
-                            # Writes the score as a string with the name
-                            Score=1000+ScoreTime+TimeBonus+(man.Health*100)
-                            ScoreLine=Name+ ":" + str(Score) + "(LEVEL 1)"
-                            print(ScoreLine)
-                            # Writes the score string in the file
-                            MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
-                            MyFile.write("\n")
-                            MyFile.write(ScoreLine)
-                            MyFile.close()
-                    # Makes the level 2 boss die after 61 hits
-                    if hitCount==61 and LevelCheck: 
-                        if RayIdle==SansIdle:
-                            tickEnd=pygame.time.get_ticks()
-                            print("LEVEL 2 COMPLETE")
-                            ScoreTime=tickEnd-tickStart
-                            RayIdle=pygame.image.load('FinalProjectResources\Images\BLANK_ICON.png')
-                            AliveCheck=False
-                            # print(ScoreTime)
-                            # print(tickStart)
-                            # print(tickEnd)
+            # This checks if we have pressed Space to call the bullets
+            if keys[pygame.K_SPACE]:
+                if man.left:
+                    facing = -1
+                else:
+                    facing = 1
+                    
+                if len(bullets) < 5:
+                    bullets.append(projectile(round(man.x + man.width //2), round(man.y + man.height//2), 6, (0,0,0), facing))
+                for bullet in bullets:
+                    # Checks if the bullet hits the boss' hitbox
+                    if (bullet.y - bullet.radius < Rayquaza.hitbox[1] + Rayquaza.hitbox[3]  and (bullet.y + bullet.radius > Rayquaza.hitbox[1]) and bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]):
+                        # print("hi")
+                        # if bullet.x + bullet.radius > Rayquaza.hitbox[0] and bullet.x - bullet.radius < Rayquaza.hitbox[0]+Rayquaza.hitbox[2]:
+                        # print("hello")
 
-                            # Creates a time bonus and a score for the player
-                            if ScoreTime<=6000:
-                                TimeBonus=1000
-                            elif ScoreTime>6000 and ScoreTime<18500:
-                                TimeBonus=500
-                            elif ScoreTime>=18500:
-                                TimeBonus=200
-                            # Writes the score as a string with the name
-                            Score=1000+ScoreTime+TimeBonus+(man.Health*100)
-                            ScoreLine2=Name+ ":" + str(Score) + "(LEVEL 2)"
-                            print(ScoreLine2)
-                            # Writes the score string in the file
-                            MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
-                            MyFile.write("\n")
-                            MyFile.write(ScoreLine2)
-                            MyFile.close()
-                            print("THANKS FOR PLAYING")
-                            quit()
-                    # This creates a revenge ability that allows the boss to shoot back
-                    if revengeCount==3:
-                        if AliveCheck:
-                            # Appends the list to fit the max amount of hits taken by the boss
-                            if len(fireBalls) < 66:
-                                # Changes the color based on the boss
-                                if not LevelCheck:
-                                    fireBalls.append(projectile(round(Rayquaza.x+Rayquaza.width//2), man.y, 20, (255,0,0), facing)) 
-                                if LevelCheck:
-                                    fireBalls.append(projectile(round(Rayquaza.x+Rayquaza.width//2), man.y, 20, (0,0,255), facing)) 
-                            # Determines the direction of the fireBall
-                            for fireBall in fireBalls:
-                                facing=-1
-                                # Checks if the fireball hits the player
-                                if (fireBall.y - fireBall.radius < man.hitbox[1] + man.hitbox[3]  and (fireBall.y + fireBall.radius > man.hitbox[1]) and fireBall.x + fireBall.radius > man.hitbox[0] and fireBall.x - fireBall.radius < man.hitbox[0]+man.hitbox[2]):
-                                            # Activates the plyer's damage function and checks if the health is 0 yet (lets him die)
-                                            man.hit()
-                                            if man.Health<=0:
-                                                print("HEALTH:",man.Health)
-                                                print("YOU DIED")
-                                                quit()
-                        else:
-                                    print("He's DED lol")
-                        revengeCount=0
+                        #Activates the hit function of the boss and adjusts the lists and counts for the boss and bullets
+                        Rayquaza.hit()
+                        bullets.pop(bullets.index(bullet))
+                        hitCount+=1
+                        revengeCount+=1
+                        # print(revengeCount)
+
+                        # Creates the ability for the boss to die once they take 40 hits (first level)
+                        if hitCount==40 and not LevelCheck:
+                                print('unga')
+                                tickEnd=pygame.time.get_ticks()
+                                print("LEVEL 1 COMPLETE")
+                                ScoreTime=tickEnd-tickStart
+                                RayIdle=pygame.image.load('FinalProjectResources\Images\BLANK_ICON.png')
+                                AliveCheck=False
+                                # print(ScoreTime)
+                                # print(tickStart)
+                                # print(tickEnd)
+
+                                # Creates a time bonus and a score for the player
+                                if ScoreTime<=6000:
+                                    TimeBonus=1000
+                                elif ScoreTime>6000 and ScoreTime<18500:
+                                    TimeBonus=500
+                                elif ScoreTime>=18500:
+                                    TimeBonus=200
+                                # Writes the score as a string with the name
+                                Score=1000+ScoreTime+TimeBonus+(man.Health*100)
+                                ScoreLine=Name+ ":" + str(Score) + "(LEVEL 1)"
+                                print(ScoreLine)
+                                # Writes the score string in the file
+                                MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
+                                MyFile.write("\n")
+                                MyFile.write(ScoreLine)
+                                MyFile.close()
+                        # Makes the level 2 boss die after 61 hits
+                        if hitCount==61 and LevelCheck: 
+                            if RayIdle==SansIdle:
+                                tickEnd=pygame.time.get_ticks()
+                                print("LEVEL 2 COMPLETE")
+                                ScoreTime=tickEnd-tickStart
+                                RayIdle=pygame.image.load('FinalProjectResources\Images\BLANK_ICON.png')
+                                AliveCheck=False
+                                # print(ScoreTime)
+                                # print(tickStart)
+                                # print(tickEnd)
+
+                                # Creates a time bonus and a score for the player
+                                if ScoreTime<=6000:
+                                    TimeBonus=1000
+                                elif ScoreTime>6000 and ScoreTime<18500:
+                                    TimeBonus=500
+                                elif ScoreTime>=18500:
+                                    TimeBonus=200
+                                # Writes the score as a string with the name
+                                Score=1000+ScoreTime+TimeBonus+(man.Health*100)
+                                ScoreLine2=Name+ ":" + str(Score) + "(LEVEL 2)"
+                                print(ScoreLine2)
+                                # Writes the score string in the file
+                                MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a') # BY using the relative path we can open the highscore text file 
+                                MyFile.write("\n")
+                                MyFile.write(ScoreLine2)
+                                MyFile.close()
+                                print("THANKS FOR PLAYING")
+                                quit()
+                        # This creates a revenge ability that allows the boss to shoot back
+                        if revengeCount==3:
+                            if AliveCheck:
+                                # Appends the list to fit the max amount of hits taken by the boss
+                                if len(fireBalls) < 66:
+                                    # Changes the color based on the boss
+                                    if not LevelCheck:
+                                        fireBalls.append(projectile(round(Rayquaza.x+Rayquaza.width//2), man.y, 20, (255,0,0), facing)) 
+                                    if LevelCheck:
+                                        fireBalls.append(projectile(round(Rayquaza.x+Rayquaza.width//2), man.y, 20, (0,0,255), facing)) 
+                                # Determines the direction of the fireBall
+                                for fireBall in fireBalls:
+                                    facing=-1
+                                    # Checks if the fireball hits the player
+                                    if (fireBall.y - fireBall.radius < man.hitbox[1] + man.hitbox[3]  and (fireBall.y + fireBall.radius > man.hitbox[1]) and fireBall.x + fireBall.radius > man.hitbox[0] and fireBall.x - fireBall.radius < man.hitbox[0]+man.hitbox[2]):
+                                                # Activates the plyer's damage function and checks if the health is 0 yet (lets him die)
+                                                man.hit()
+                                                if man.Health<=0:
+                                                    print("HEALTH:",man.Health)
+                                                    print("YOU DIED")
+                                                    quit()
+                            else:
+                                        print("He's DED lol")
+                            revengeCount=0
 
 
-        # Lets the player go left as long as he is within the screen
-        if keys[pygame.K_LEFT] and man.x > man.vel:
-            man.x -= man.vel
-            manRect.x=man.x
-            man.left = True
-            man.right = False
-            man.standing = False
-        # Lets the player go right as long as he is within the boundries
-        elif keys[pygame.K_RIGHT] and man.x < WIDTH - man.width - man.vel:
-            man.x += man.vel
-            manRect.x=man.x
-            man.right = True
-            man.left = False
-            man.standing = False
-        # Lets the player stand in one place
-        else:
-            man.standing = True
-            man.walkCount = 0
-
-        # Deals damage to the player if he touches the boss
-        if RayHitbox.colliderect(manRect) and AliveCheck:
-            man.Health-=1
-            print("HEALTH:",man.Health) 
-            man.x=0
-            if man.Health<=0:
-                print("YOU DIED")
-                quit()  
-        # Deals damage to the player if they touch the spikes when the second boss is visible
-        if SpikeHitbox.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
-            man.x=0
-            man.Health-=1
-            print("HEALTH:",man.Health) 
-            if man.Health<=0:
-                print("YOU DIED")
-                quit() 
-        if SpikeHitbox2.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
-            man.x=0
-            man.Health-=1
-            print("HEALTH:",man.Health) 
-            if man.Health<=0:
-                print("YOU DIED")
-                quit() 
-        # Stuff for the jumping of the player
-        if not(man.isJump):
-            if keys[pygame.K_UP]:
-                man.isJump = True
+            # Lets the player go left as long as he is within the screen
+            if keys[pygame.K_LEFT] and man.x > man.vel:
+                man.x -= man.vel
+                manRect.x=man.x
+                man.left = True
                 man.right = False
+                man.standing = False
+            # Lets the player go right as long as he is within the boundries
+            elif keys[pygame.K_RIGHT] and man.x < WIDTH - man.width - man.vel:
+                man.x += man.vel
+                manRect.x=man.x
+                man.right = True
                 man.left = False
-                man.walkCount = 0
-        else:
-            if man.jumpCount >= -10:
-                neg = 1
-                if man.jumpCount < 0:
-                    neg = -1
-                man.y -= (man.jumpCount ** 2) * 0.5 * neg
-                manRect.y=man.y
-                man.jumpCount -= 1
+                man.standing = False
+            # Lets the player stand in one place
             else:
-                man.isJump = False
-                man.jumpCount = 10
+                man.standing = True
+                man.walkCount = 0
 
-    #Resets and changes the level, health, changes the background and boss, and creates the spikes on the ground (when you touch the end of the screen)
+            # Deals damage to the player if he touches the boss
+            if RayHitbox.colliderect(manRect) and AliveCheck:
+                man.Health-=1
+                print("HEALTH:",man.Health) 
+                man.x=0
+                if man.Health<=0:
+                    print("YOU DIED")
+                    quit()  
+            # Deals damage to the player if they touch the spikes when the second boss is visible
+            if SpikeHitbox.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
+                man.x=0
+                man.Health-=1
+                print("HEALTH:",man.Health) 
+                if man.Health<=0:
+                    print("YOU DIED")
+                    quit() 
+            if SpikeHitbox2.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
+                man.x=0
+                man.Health-=1
+                print("HEALTH:",man.Health) 
+                if man.Health<=0:
+                    print("YOU DIED")
+                    quit() 
+            # Stuff for the jumping of the player
+            if not(man.isJump):
+                if keys[pygame.K_UP]:
+                    man.isJump = True
+                    man.right = False
+                    man.left = False
+                    man.walkCount = 0
+            else:
+                if man.jumpCount >= -10:
+                    neg = 1
+                    if man.jumpCount < 0:
+                        neg = -1
+                    man.y -= (man.jumpCount ** 2) * 0.5 * neg
+                    manRect.y=man.y
+                    man.jumpCount -= 1
+                else:
+                    man.isJump = False
+                    man.jumpCount = 10
+
+        #Resets and changes the level, health, changes the background and boss, and creates the spikes on the ground (when you touch the end of the screen)
     if man.x==WIDTH-65 and not AliveCheck:
-        global SkyBG, Health
         man.x=0
         Health=10
         SkyBG=SansBG
