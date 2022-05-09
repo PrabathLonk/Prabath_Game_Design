@@ -7,8 +7,8 @@ pygame.init()
 os.system('cls')
 
 #Create our screen and it's width and height from Tech With Tim's Pygame Tutorial : https://www.techwithtim.net/tutorials/game-development-with-python/pygame-tutorial/projectiles/
-WIDTH=600
-HEIGHT=600
+WIDTH=700
+HEIGHT=680
 win = pygame.display.set_mode((WIDTH,HEIGHT))
 
 #Title Our sceen
