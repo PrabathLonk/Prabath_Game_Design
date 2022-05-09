@@ -440,6 +440,49 @@ def playGame():
     global AliveCheck
     global RayIdle
     global SansIdle
+    # Defines the images for the game and scales them as well as the hitboxes to show:
+    walkRight = [pygame.image.load('FinalProjectResources\Images\R1.png'), pygame.image.load('FinalProjectResources\Images\R2.png'), pygame.image.load('FinalProjectResources\Images\R3.png'), pygame.image.load('FinalProjectResources\Images\R4.png'), pygame.image.load('FinalProjectResources\Images\R5.png'), pygame.image.load('FinalProjectResources\Images\R6.png'), pygame.image.load('FinalProjectResources\Images\R7.png'), pygame.image.load('FinalProjectResources\Images\R8.png'), pygame.image.load('FinalProjectResources\Images\R9.png')]
+    walkLeft = [pygame.image.load('FinalProjectResources\Images\L1.png'), pygame.image.load('FinalProjectResources\Images\L2.png'), pygame.image.load('FinalProjectResources\Images\L3.png'), pygame.image.load('FinalProjectResources\Images\L4.png'), pygame.image.load('FinalProjectResources\Images\L5.png'), pygame.image.load('FinalProjectResources\Images\L6.png'), pygame.image.load('FinalProjectResources\Images\L7.png'), pygame.image.load('FinalProjectResources\Images\L8.png'), pygame.image.load('FinalProjectResources\Images\L9.png')]
+    JakePaul1=pygame.image.load('FinalProjectResources\Images\JakePaulLowEffort.png')
+    JakePaul=pygame.transform.scale(JakePaul1,(64,64))
+    bg = pygame.image.load('FinalProjectResources\Images\SkyBackground_Rayquaza.jpg')
+    bg2= pygame.image.load('FinalProjectResources\Images\SpongebobBackground_SansFightBackground.jpg')
+    SkyBG=pygame.transform.scale(bg,(WIDTH,HEIGHT))
+    SansBG=pygame.transform.scale(bg2,(WIDTH,HEIGHT))
+    char = pygame.image.load('FinalProjectResources\Images\standing.png')
+    Ray1=pygame.image.load('FinalProjectResources\Images\RayquazaIdle.png')
+    RayIdle=pygame.transform.scale(Ray1,(WIDTH/4,HEIGHT-175))
+    RayHitbox=pygame.Rect(WIDTH-WIDTH/4,105,WIDTH/4,HEIGHT-175)
+    Sans1=pygame.image.load('FinalProjectResources\Images\SansStartIdle.png')
+    SansIdle=pygame.transform.scale(Sans1,(WIDTH/4,HEIGHT-175))
+    SansHitbox=pygame.Rect(WIDTH-WIDTH/4,105,WIDTH/4,HEIGHT-175)
+    manRect=pygame.Rect(210, 400, 64, 64)
+    # Places the bottom platform to stand on:
+    BottomPlat= pygame.Rect(0,HEIGHT-20,WIDTH,10)
+    # Creates a tick count for time functions
+    clock = pygame.time.Clock()
+    tickStart=pygame.time.get_ticks()
+    # Just creates a color for the health bar
+    green=(18,230,3)
+    # Defines botht the player and enemy health
+    RayquazaHealth=pygame.Rect(WIDTH/2-100,WIDTH-(WIDTH-50),200,8)
+    SansHealth=pygame.Rect(WIDTH/2-100,WIDTH-(WIDTH-50),311,8)
+    Health=10
+    #Creates two Counts to check health of the boss and allows the boss to counter attack
+    hitCount=0
+    revengeCount=0
+    # Just defines the player's name and the the bonus that the player gets for time
+    TimeBonus=0
+    # Spikes image
+    Spike1=pygame.image.load('FinalProjectResources\Images\Spikes.png')
+    Spike=pygame.transform.scale(Spike1,(48,28))
+    # Gets the Player's name for score
+    Name=input("Type your name:")
+    # Checks if the Boss is alive
+    AliveCheck=True
+    AliveCheck2=False
+    # Checks the level:
+    LevelCheck=False
     global player
     global spikes
     global enemy
