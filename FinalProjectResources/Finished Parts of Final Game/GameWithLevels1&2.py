@@ -380,15 +380,15 @@ while run:
             quit()  
     # Deals damage to the player if they touch the spikes when the second boss is visible
     if SpikeHitbox.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
-        man.x=0
         man.Health-=1
+        man.x=0
         print("HEALTH:",man.Health) 
         if man.Health<=0:
             print("YOU DIED")
             quit() 
     if SpikeHitbox2.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
-        man.x=0
         man.Health-=1
+        man.x=0
         print("HEALTH:",man.Health) 
         if man.Health<=0:
             print("YOU DIED")
