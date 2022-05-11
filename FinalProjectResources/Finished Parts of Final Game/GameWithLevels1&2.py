@@ -216,7 +216,7 @@ fireBalls=[]
 # fireBall=projectile(Rayquaza.x,random.randint((man.x-50),(man.x+50)),5,(255,0,0),0)
 # Creates the loop that runs the game
 run = True
-run2=False
+# run2=False
 while run:
     # print(man.x)
     for fireBall in fireBalls:
