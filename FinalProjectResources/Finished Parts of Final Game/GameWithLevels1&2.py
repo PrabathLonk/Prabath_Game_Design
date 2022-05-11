@@ -372,9 +372,9 @@ while run:
 
     # Deals damage to the player if he touches the boss
     if RayHitbox.colliderect(manRect) and AliveCheck:
+        man.x=0
         man.Health-=1
         print("HEALTH:",man.Health) 
-        man.x=0
         if man.Health<=0:
             print("YOU DIED")
             quit()  
