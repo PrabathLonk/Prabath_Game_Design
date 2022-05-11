@@ -212,7 +212,7 @@ SpikeHitbox=pygame.Rect(spike.x,spike.y,spike.width,spike.height)
 SpikeHitbox2=pygame.Rect(spike2.x,spike2.y,spike2.width,spike2.height)
 bullets = []
 fireBalls=[]
-GastBlasts=[]
+# GastBlasts=[]
 # fireBall=projectile(Rayquaza.x,random.randint((man.x-50),(man.x+50)),5,(255,0,0),0)
 # Creates the loop that runs the game
 run = True
