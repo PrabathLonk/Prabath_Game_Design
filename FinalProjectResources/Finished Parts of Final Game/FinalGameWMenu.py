@@ -437,6 +437,8 @@ def changeScreenSize(xZ,yZ):
         
 
 def playGame():
+    global LEV_I
+    global MENU
     global AliveCheck
     global RayIdle
     global SansIdle
@@ -477,7 +479,7 @@ def playGame():
     Spike1=pygame.image.load('FinalProjectResources\Images\Spikes.png')
     Spike=pygame.transform.scale(Spike1,(48,28))
     # Gets the Player's name for score
-    Name=input("Type your name:")
+    # Name=input("Type your name:")
     # Checks if the Boss is alive
     AliveCheck=True
     AliveCheck2=False
@@ -729,7 +731,11 @@ def playGame():
                                 MyFile.write(ScoreLine2)
                                 MyFile.close()
                                 print("THANKS FOR PLAYING")
-                                quit()
+                                LEV_I=False
+                                MENU=True
+                                screen.fill(background)
+                                TitleMenu("MENU")
+                                MainMenu(MenuList)
                         # This creates a revenge ability that allows the boss to shoot back
                         if revengeCount==3:
                             if AliveCheck:
@@ -748,9 +754,11 @@ def playGame():
                                                 # Activates the plyer's damage function and checks if the health is 0 yet (lets him die)
                                                 man.hit()
                                                 if man.Health<=0:
-                                                    print("HEALTH:",man.Health)
                                                     print("YOU DIED")
-                                                    quit()
+                                                    LEV_I=False
+                                                    MENU=True
+                                                    TitleMenu("MENU")
+                                                    MainMenu(MenuList)
                             else:
                                         print("He's DED lol")
                             revengeCount=0
@@ -782,7 +790,10 @@ def playGame():
                 man.x=0
                 if man.Health<=0:
                     print("YOU DIED")
-                    quit()  
+                    LEV_I=False
+                    MENU=True
+                    TitleMenu("MENU")
+                    MainMenu(MenuList) 
             # Deals damage to the player if they touch the spikes when the second boss is visible
             if SpikeHitbox.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
                 man.x=0
@@ -790,14 +801,20 @@ def playGame():
                 print("HEALTH:",man.Health) 
                 if man.Health<=0:
                     print("YOU DIED")
-                    quit() 
+                    LEV_I=False
+                    MENU=True
+                    TitleMenu("MENU")
+                    MainMenu(MenuList)
             if SpikeHitbox2.colliderect(manRect) and AliveCheck and RayIdle==SansIdle :
                 man.x=0
                 man.Health-=1
                 print("HEALTH:",man.Health) 
                 if man.Health<=0:
                     print("YOU DIED")
-                    quit() 
+                    LEV_I=False
+                    MENU=True
+                    TitleMenu("MENU")
+                    MainMenu(MenuList)
             # Stuff for the jumping of the player
             if not(man.isJump):
                 if keys[pygame.K_UP]:
@@ -820,7 +837,7 @@ def playGame():
         #Resets and changes the level, health, changes the background and boss, and creates the spikes on the ground (when you touch the end of the screen)
     if man.x==WIDTH-65 and not AliveCheck:
         man.x=0
-        Health=10
+        man.Health=10
         SkyBG=SansBG
         RayIdle=SansIdle
         AliveCheck=True
@@ -829,6 +846,7 @@ def playGame():
         tickStart=pygame.time.get_ticks()
         LevelCheck=True
     redrawGameWindow()
+    pygame.display.update()
     # Updates animations and movement        
 
 while check:
@@ -934,9 +952,9 @@ while check:
         MyFile=open('FinalProjectResources\Finished Parts of Final Game\FinalGameScores.txt', 'a')
         ScoreB()
         BackButton=INST_FNT.render("BACK",1,(0,0,0))
-        screen.blit(BackButton,(200,500))
+        screen.blit(BackButton,(260,525))
         pygame.display.update()
-        if ((mouse_pos[0] >200 and mouse_pos[0] <240) and (mouse_pos[1] >500 and mouse_pos[1] <540)):
+        if ((mouse_pos[0] >260 and mouse_pos[0] <300) and (mouse_pos[1] >525 and mouse_pos[1] <565)):
                 bak()
                 TitleMenu("Main Menu")
                 MainMenu(MenuList)
@@ -1011,4 +1029,4 @@ while check:
     # pygame.time.delay(10)
 
 os.system('cls')
-pygame.quit()
+# pygame.quit()
